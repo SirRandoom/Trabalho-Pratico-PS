@@ -16,10 +16,11 @@ void mostra_tela(Tela* t){
 	clear();
 	
 	if(t->estado == INICIO){
-		move(1,1);
-		printw("Pressione Qualquer Tecla Para Iniciar o Jogo.");
 		init_pair(1,COLOR_BLACK,COLOR_BLUE);
 		bkgd(COLOR_PAIR(1));
+		move(1,1);
+		printw("Pressione Qualquer Tecla Para Iniciar o Jogo.");
+
 	}
 	else if(t->estado == JOGO){
 		init_pair(1,COLOR_WHITE,COLOR_BLACK);
