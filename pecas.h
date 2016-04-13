@@ -4,7 +4,7 @@
 
 typedef struct{
 	int tamanho;
-	int move;
+	unsigned short int cor_peca, move_peca;
 	bloco* blocos[];
 }peca;
 
