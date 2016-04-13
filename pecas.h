@@ -1,12 +1,11 @@
-typedef struct{
-	short int cor;
-	int pos_x, pox_y;
-}bloco;
+#include <stdio.h>
+#include <stdlib.h>
+#include "tela.h"
 
 typedef struct{
 	int tamanho;
-	bloco blocos[];
-	bool move;
+	int move;
+	bloco* blocos[];
 }peca;
 
 void nova_peca(Tela* tela);

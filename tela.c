@@ -5,7 +5,7 @@
 #define LARGURA 25
 
 Tela* cria_tela(){
-	Tela* t = malloc(sizeof(Tela) + COMPRIMENTO*LARGURA*sizeof(char));
+	Tela* t = malloc(sizeof(Tela) + COMPRIMENTO*LARGURA*sizeof(bloco));
 	t->comprimento = COMPRIMENTO;
 	t->largura = LARGURA;
 	t->estado = INICIO;	
@@ -29,7 +29,7 @@ void mostra_tela(Tela* t){
 		for(i = 0; i < t->comprimento; i++){
 			for(j = 0; j < t->largura; j++){
 				move(i,j);
-				printw(&(t->celulas[j+i*t->comprimento]));
+				printw('o');
 			}
 			printf("\n");
 		}
@@ -43,11 +43,13 @@ void destroi_tela(Tela* t){
 }	
 
 int main(){
+	init_pair(1,COLOR_WHITE,COLOR_BLUE);
+	init_pair(2,COLOR_BLUE,COLOR_WHITE);
+	init_pair(3,COLOR_RED,COLOR_WHITE);
+	init_pair(4,COLOR_GREEN,COLOR_BLACK);
 	initscr();
 	start_color();
 	Tela* t = cria_tela();
-	
-	t->celulas[10 + t->comprimento * 11] = t->celulas[10 + t->comprimento * 12] = t->celulas[10 + t->comprimento * 13] = 'o';
 	
 	mostra_tela(t);
 	if(getch()) t->estado = JOGO;
