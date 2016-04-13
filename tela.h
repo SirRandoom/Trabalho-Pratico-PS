@@ -1,4 +1,5 @@
 #include<curses.h>
+#include"bloco.h"
 
 enum{INICIO,JOGO,FINAL};
 
@@ -6,7 +7,8 @@ typedef struct{
 	int estado;
 	int comprimento;
 	int largura;
-	char celulas[];
+	WINDOW *janela;
+	bloco blocos[];
 }Tela;
 
 Tela* cria_tela();
