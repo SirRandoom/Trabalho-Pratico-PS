@@ -16,4 +16,3 @@ typedef struct{
 Tela* cria_tela();
 void mostra_tela(Tela* t);
 void destroi_tela(Tela* t);
-
