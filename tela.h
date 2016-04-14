@@ -5,11 +5,12 @@
 
 enum estado {INICIO,JOGO,FINAL};
 
-typedef struct{
+typedef struct Tela{
 	int estado;
 	int comprimento;
 	int largura;
 	WINDOW *janela;
+	struct Peca* peca;
 	bloco blocos[];
 }Tela;
 

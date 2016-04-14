@@ -1,9 +1,11 @@
 #include "pecas.h"
+#include <time.h>
 
 //Par de cores das peças variam entre 4~7
 unsigned short int cor_nova_peca = 4;
 
 void nova_peca(Tela* tela){
+	srand(time(NULL));
 	int i;
 	int orientacao = rand()%2;
 	int tamanho = rand()%3 + 3;
@@ -18,12 +20,12 @@ void nova_peca(Tela* tela){
 //Associa os blocos da tela que irão fazer parte da peça
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
-			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2 + tela->largura%2]);
+			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
 			p->blocos[i]->cor = p->cor_peca;
 			p->blocos[i]->bolinha = 'o';
 			p->blocos[i]->move = 1;
 		}else{
-			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + tela->largura/2 + tela->largura%2]);
+			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + tela->largura/2]);
 			p->blocos[i]->cor = p->cor_peca;
 			p->blocos[i]->bolinha = 'o';
 			p->blocos[i]->move = 1;
@@ -33,6 +35,7 @@ void nova_peca(Tela* tela){
 		cor_nova_peca = 4;
 	}
 	cor_nova_peca++;
+	tela->peca = p;
 }
 	
 void move_peca_x(peca* p, int x){
@@ -44,7 +47,13 @@ void move_peca_x(peca* p, int x){
 	switch(x){
 		case 1:
 			for (i = 0; i < p->tamanho; i++){
-				if(((p->blocos[i]->direita->bolinha == 'o')&&(p->blocos[i]->direita->move == 0))||(p->blocos[i]->pos_x == 24)){
+				if(p->blocos[i]->pos_x != 24){
+					if(((p->blocos[i]->direita->bolinha == 'o')&&(p->blocos[i]->direita->move == 0))){
+						colisao = 1;
+						break;
+					}
+				}
+				else{
 					colisao = 1;
 					break;
 				}
@@ -62,9 +71,15 @@ void move_peca_x(peca* p, int x){
 				}
 			}
 			break;
-		case -1: 
+		case -1:
 			for (i = 0; i < p->tamanho; i++){
-				if(((p->blocos[i]->esquerda->bolinha == 'o')&&(p->blocos[i]->esquerda->move == 0))||(p->blocos[i]->pos_x == 0)){
+				if((p->blocos[i]->pos_x != 0)){
+					if(((p->blocos[i]->esquerda->bolinha == 'o')&&(p->blocos[i]->esquerda->move == 0))){
+						colisao = 1;
+						break;
+					}
+				}
+				else{
 					colisao = 1;
 					break;
 				}
@@ -94,7 +109,15 @@ void move_peca_y(peca* p, int y){
 
 	if (y>0){
 		for (i = 0; i < p->tamanho; i++){
-			if(((p->blocos[i]->abaixo->bolinha == 'o')&&(p->blocos[i]->abaixo->move == 0))||(p->blocos[i]->pos_y == 14)){
+			if(p->blocos[i]->pos_y != 14){
+				if(((p->blocos[i]->abaixo->bolinha == 'o')&&(p->blocos[i]->abaixo->move == 0))){
+					colisao = 1;
+					p->move_peca = 0;
+					p->blocos[i]->move = 0;
+					break;
+				}
+			}
+			else{
 				colisao = 1;
 				p->move_peca = 0;
 				p->blocos[i]->move = 0;

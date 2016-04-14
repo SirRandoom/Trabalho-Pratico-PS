@@ -13,6 +13,8 @@ Tela* cria_tela(){
 		for(j=0; j < t->largura; j++){
 			t->blocos[j+i*t->largura].bolinha = ' ';
 			t->blocos[j+i*t->largura].move = 0;
+			t->blocos[j+i*t->largura].pos_x = j;
+			t->blocos[j+i*t->largura].pos_y = i;
 			if(j!=0)
 				t->blocos[j+i*t->largura].esquerda = &(t->blocos[j-1+i*t->largura]);
 			else
@@ -31,39 +33,39 @@ Tela* cria_tela(){
 }
 
 void mostra_tela(Tela* t){
+	init_pair(1,COLOR_BLACK,COLOR_BLUE);
+	init_pair(2,COLOR_WHITE,COLOR_BLACK);
+	init_pair(4,COLOR_YELLOW,COLOR_BLACK);
+	init_pair(5,COLOR_BLUE,COLOR_BLACK);
+	init_pair(6,COLOR_RED,COLOR_BLACK);
+	init_pair(7,COLOR_GREEN,COLOR_BLACK);
+	
+	
 	clear();
 	refresh();	
 	if(t->estado == INICIO){
-		init_pair(6,COLOR_BLACK,COLOR_BLUE);
-		bkgd(COLOR_PAIR(6));
+		
+		bkgd(COLOR_PAIR(1));
 		move(1,1);
 		printw("Pressione Qualquer Tecla Para Iniciar o Jogo.");
 
 	}
 	else if(t->estado == JOGO){
-		init_pair(1,COLOR_YELLOW,COLOR_BLACK);
-		init_pair(2,COLOR_BLUE,COLOR_BLACK);
-		init_pair(3,COLOR_RED,COLOR_BLACK);
-		init_pair(4,COLOR_GREEN,COLOR_BLACK);
-		init_pair(5,COLOR_WHITE,COLOR_BLACK);
+	
 		t->janela = newwin(t->comprimento + 2, t->largura + 2, 5, 10);
 		box(t->janela, ACS_VLINE, ACS_HLINE);
-		bkgd(COLOR_PAIR(5));
+		bkgd(COLOR_PAIR(2));
 		refresh();
-		wbkgd(t->janela,COLOR_PAIR(5));
+		wbkgd(t->janela,COLOR_PAIR(2));
 		int i,j;
 		for(i = 0; i < t->comprimento; i++){
 			for(j = 0; j < t->largura; j++){
-				if(t->blocos[j+i*t->largura].bolinha == 'o'){
-					wgetch(t->janela);
-				}
 				wattron(t->janela,COLOR_PAIR(t->blocos[j+i*t->largura].cor));
 				mvwprintw(t->janela,i+1,j+1,&(t->blocos[j+i*t->largura].bolinha));
 				wrefresh(t->janela);				
 			}
 			/*wprintw(t->janela,"\n");*/
 		}
-		wgetch(t->janela);
 	}
 	else if(t->estado == FINAL){}
 	refresh();
@@ -73,7 +75,7 @@ void destroi_tela(Tela* t){
 	free(t);
 }	
 
-int main(){
+/*int main(){
 	initscr();
 	start_color();
 	Tela* t = cria_tela();
@@ -93,4 +95,4 @@ int main(){
 	endwin();
 	destroi_tela(t);
 	return 0;
-}
+}*/

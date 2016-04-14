@@ -1,6 +1,6 @@
 #include <curses.h>
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 void inicia_ncurses();
 void finaliza_ncurses();
