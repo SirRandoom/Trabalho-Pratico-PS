@@ -1,6 +1,6 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include"pecas.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "pecas.h"
 
 int main(){
 	inicia_ncurses();
