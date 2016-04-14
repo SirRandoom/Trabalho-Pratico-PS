@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <curses.h>
+
 typedef struct Bloco{
 	char bolinha;
 	unsigned short int cor;

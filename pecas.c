@@ -12,6 +12,7 @@ void nova_peca(Tela* tela){
 
 	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
 
+//Inicializar os parâmetros da peça
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->move_peca = 1;
@@ -44,6 +45,11 @@ void move_peca_x(peca* p, int x){
 	int i;
 
 // Movimento para direita: x>0;  Movimento para esquerda: x<0
+// Se os blocos estejam tentando se mover para uma posição ocupada
+// por blocos estáticos ou os limites de tela ele não irá se mover.
+// Caso contrário os blocos atuais da peça são "limpos" e 
+// os ponteiros da peça e as informações dos novos blocos
+// são atualizados.
 	switch(x){
 		case 1:
 			for (i = 0; i < p->tamanho; i++){
@@ -107,20 +113,25 @@ void move_peca_y(peca* p, int y){
 	int i;
 	unsigned short int colisao = 0;
 
+// A peça não pode se mover para cima.
+// A variável Y cresce para baixo, ou seja, y deve ser maior que 0.
+
+// Se os blocos estejam tentando se mover para uma posição ocupada
+// por blocos estáticos ou os limites de tela ele não irá se mover.
+// Caso contrário os blocos atuais da peça são "limpos" e 
+// os ponteiros da peça e as informações dos novos blocos
+// são atualizados.
+
 	if (y>0){
 		for (i = 0; i < p->tamanho; i++){
 			if(p->blocos[i]->pos_y != 14){
 				if(((p->blocos[i]->abaixo->bolinha == 'o')&&(p->blocos[i]->abaixo->move == 0))){
-					colisao = 1;
-					p->move_peca = 0;
-					p->blocos[i]->move = 0;
+					colisao = 1;			
 					break;
 				}
 			}
 			else{
 				colisao = 1;
-				p->move_peca = 0;
-				p->blocos[i]->move = 0;
 				break;
 			}
 		}
@@ -138,6 +149,12 @@ void move_peca_y(peca* p, int y){
 		}
 	}
 
+	if (colisao==1){
+		for (i = 0; i < p->tamanho; i++){
+			p->blocos[i]->move = 0;
+		}
+		p->move_peca = 0;
+	}
 
 }
 

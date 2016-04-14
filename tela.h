@@ -1,7 +1,4 @@
-#include<curses.h>
-#include<stdlib.h>
-#include<stdio.h>
-#include"bloco.h"
+#include "bloco.h"
 
 enum estado {INICIO,JOGO,FINAL};
 
