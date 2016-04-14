@@ -5,10 +5,28 @@
 #define LARGURA 25
 
 Tela* cria_tela(){
+	int i,j;
 	Tela* t = malloc(sizeof(Tela) + COMPRIMENTO*LARGURA*sizeof(bloco));
 	t->comprimento = COMPRIMENTO;
 	t->largura = LARGURA;
 	t->estado = INICIO;	
+	for(i=0; i < t->comprimento; i++){
+		for(j=0; j < t->largura; j++){
+			t->blocos[j+i*t->comprimento].bolinha = ' ';
+			if(j!=0)
+				t->blocos[j+i*t->comprimento].esquerda = &(t->blocos[j-1+i*t->comprimento]);
+			else
+				t->blocos[j+i*t->comprimento].esquerda = NULL;
+			if(j!= t->largura - 1)
+				t->blocos[j+i*t->comprimento].direita = &(t->blocos[j+1+i*t->comprimento]);
+			else
+				t->blocos[j+i*t->comprimento].direita = NULL;
+			if(i!= t->comprimento - 1)
+				t->blocos[j+i*t->comprimento].abaixo = &(t->blocos[j+(i+1)*t->comprimento]);
+			else
+				t->blocos[j+i*t->comprimento].abaixo = NULL;
+		}
+	}
 	return t;
 }
 
