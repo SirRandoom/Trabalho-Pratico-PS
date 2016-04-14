@@ -17,4 +17,3 @@ tela.o: tela.c tela.h pecas.h
 
 limpa: 
 	rm *.o
-
