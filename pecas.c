@@ -112,7 +112,7 @@ void move_peca_y(peca* p, int y){
 
 	int i;
 	unsigned short int colisao = 0;
-
+	unsigned short int limite_inferior =0;
 // A peça não pode se mover para cima.
 // A variável Y cresce para baixo, ou seja, y deve ser maior que 0.
 
@@ -145,11 +145,14 @@ void move_peca_y(peca* p, int y){
 				p->blocos[i]->cor = p->cor_peca;
 				p->blocos[i]->bolinha = 'o';
 				p->blocos[i]->move = 1;
+				if (p->blocos[i]->pos_y == 14){
+					limite_inferior = 1;
+				}
 			}
 		}
 	}
 
-	if (colisao==1){
+	if (colisao==1 || limite_inferior == 1){
 		for (i = 0; i < p->tamanho; i++){
 			p->blocos[i]->move = 0;
 		}
