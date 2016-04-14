@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tela.h"
-#define COMPRIMENTO 15
-#define LARGURA 25
+
 
 Tela* cria_tela(){
 	int i,j;
