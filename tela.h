@@ -1,7 +1,9 @@
 #include<curses.h>
+#include<stdlib.h>
+#include<stdio.h>
 #include"bloco.h"
 
-enum{INICIO,JOGO,FINAL};
+enum estado {INICIO,JOGO,FINAL};
 
 typedef struct{
 	int estado;

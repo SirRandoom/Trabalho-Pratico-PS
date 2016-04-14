@@ -18,12 +18,12 @@ void nova_peca(Tela* tela){
 //Associa os blocos da tela que irão fazer parte da peça
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
-			p->blocos[i] = &(tela->blocos[i*LARGURA + LARGURA/2 + LARGURA%2]);
+			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2 + tela->largura%2]);
 			p->blocos[i]->cor = p->cor_peca;
 			p->blocos[i]->bolinha = 'o';
 			p->blocos[i]->move = 1;
 		}else{
-			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + LARGURA/2 + LARGURA%2]);
+			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + tela->largura/2 + tela->largura%2]);
 			p->blocos[i]->cor = p->cor_peca;
 			p->blocos[i]->bolinha = 'o';
 			p->blocos[i]->move = 1;
@@ -41,46 +41,42 @@ void move_peca_x(peca* p, int x){
 	int i;
 
 // Movimento para direita: x>0;  Movimento para esquerda: x<0
-	switch(x){
-		case x>0:
-			for (int i = 0; i < p->tamanho; i++){
-				if(((p->blocos[i]->direita->bolinha == 'o')&&(p->blocos[i]->direita->move == 0))||(p->blocos[i]->pos_x == 24)){
-					colisao = 1;
-					break 2;
-				}
+	if(x>0){
+		for (i = 0; i < p->tamanho; i++){
+			if(((p->blocos[i]->direita->bolinha == 'o')&&(p->blocos[i]->direita->move == 0))||(p->blocos[i]->pos_x == 24)){
+				colisao = 1;
+				break 2;
 			}
-			for (int i = p->tamanho - 1; i >= 0; i--){
-				p->blocos[i]->cor = 2;
-				p->blocos[i]->bolinha = ' ';
-				p->blocos[i]->move = 0;
+		}
+		for (i = p->tamanho - 1; i >= 0; i--){
+			p->blocos[i]->cor = 2;
+			p->blocos[i]->bolinha = ' ';
+			p->blocos[i]->move = 0;
 
-				p->blocos[i] = p->blocos[i]->direita];
-				p->blocos[i]->cor = p->cor_peca;
-				p->blocos[i]->bolinha = 'o';
-				p->blocos[i]->move = 1;
-			}
-			break;
-		case x<0: 
-			for (int i = 0; i < p->tamanho; i++){
-				if(((p->blocos[i]->esquerda->bolinha == 'o')&&(p->blocos[i]->esquerda->move == 0))||(p->blocos[i]->pos_x == 0)){
-					colisao = 1;
+			p->blocos[i] = p->blocos[i]->direita];
+			p->blocos[i]->cor = p->cor_peca;
+			p->blocos[i]->bolinha = 'o';
+			p->blocos[i]->move = 1;
+		}
+	
+	else if(x<0){
+	 	
+		for (i = 0; i < p->tamanho; i++){
+			if(((p->blocos[i]->esquerda->bolinha == 'o')&&(p->blocos[i]->esquerda->move == 0))||(p->blocos[i]->pos_x == 0)){
+				colisao = 1;
 					break 2;
-				}
 			}
-			for (int i = 0; i < p->tamanho; i++){
-				p->blocos[i]->cor = 2;
-				p->blocos[i]->bolinha = ' ';
-				p->blocos[i]->move = 0;
+		}
+		for (i = 0; i < p->tamanho; i++){
+			p->blocos[i]->cor = 2;
+			p->blocos[i]->bolinha = ' ';
+			p->blocos[i]->move = 0;
 
-				p->blocos[i] = p->blocos[i]->esquerda];
-				p->blocos[i]->cor = p->cor_peca;
-				p->blocos[i]->bolinha = 'o';
-				p->blocos[i]->move = 1;
-			}
-			break;
-		default:
-			break;
-	}
+			p->blocos[i] = p->blocos[i]->esquerda];
+			p->blocos[i]->cor = p->cor_peca;
+			p->blocos[i]->bolinha = 'o';
+			p->blocos[i]->move = 1;
+		}
 }
 
 void move_peca_y(peca* peca, int y){
@@ -95,7 +91,7 @@ void move_peca_y(peca* peca, int y){
 			p->blocos[i]->move = 0;
 			break;
 		}
-		for (int i = p->tamanho - 1; i >= 0; i--){
+		for (i = p->tamanho - 1; i >= 0; i--){
 			p->blocos[i]->cor = 2;
 			p->blocos[i]->bolinha = ' ';
 			p->blocos[i]->move = 0;

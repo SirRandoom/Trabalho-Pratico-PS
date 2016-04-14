@@ -1,9 +1,9 @@
-typedef struct{
+typedef struct bloco {
 	char bolinha;
-	unsigned short int cor = 0;
+	unsigned short int cor;
 	int pos_x, pox_y;
-	unsigned short int move = 0;
-	bloco* esquerda;
-	bloco* direita;
-	bloco* abaixo;
-}bloco;
+	unsigned short int move;
+	struct bloco* esquerda;
+	struct bloco* direita;
+	struct bloco* abaixo;
+}
