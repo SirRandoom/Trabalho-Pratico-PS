@@ -12,9 +12,8 @@ engine.o: engine.c engine.h
 pecas.o: pecas.c pecas.h  tela.h
 	gcc -c pecas.c -lncurses
 
-tela.o: tela.c tela.h pecas.h
+tela.o: tela.c tela.h pecas.h 
 	gcc -c tela.c -lncurses
 
 limpa: 
 	rm *.o
-
