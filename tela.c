@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"tela.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "tela.h"
 #define COMPRIMENTO 15
 #define LARGURA 25
 
@@ -13,6 +13,7 @@ Tela* cria_tela(){
 	for(i=0; i < t->comprimento; i++){
 		for(j=0; j < t->largura; j++){
 			t->blocos[j+i*t->comprimento].bolinha = ' ';
+			t->blocos[j+i*t->comprimento].move = 0;
 			if(j!=0)
 				t->blocos[j+i*t->comprimento].esquerda = &(t->blocos[j-1+i*t->comprimento]);
 			else
