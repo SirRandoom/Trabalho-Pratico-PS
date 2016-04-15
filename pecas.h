@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "tela.h"
 
-typedef struct{
+typedef struct Peca{
 	int tamanho;
-	int move;
+	unsigned short int cor_peca, move_peca;
 	bloco* blocos[];
 }peca;
 
