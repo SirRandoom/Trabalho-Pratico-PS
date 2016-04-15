@@ -49,8 +49,9 @@ int main(){
 			tela->tempo_m = (atual.time - inicio.time)/60;
 			tela->tempo_s = (atual.time - inicio.time)%60;
 			mostra_tela(tela);
+			timeout(-1);
 			getch();
-			get = 27;
+			get = KEY_F(4);
 		}	
 	}	
 			

@@ -84,6 +84,7 @@ void mostra_tela(Tela* t){
 		mvprintw(3,9,tempo_m);
 		mvprintw(3,11,":");
 		mvprintw(3,13,tempo_s);
+		mvprintw(5,1,"Pressione Qualquer Tecla para finalizar o jogo.");
 	}
 	refresh();
 }
