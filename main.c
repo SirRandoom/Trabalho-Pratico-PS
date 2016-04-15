@@ -16,7 +16,7 @@ int main(){
 	mostra_tela(tela);
 		
 	while(pega_input(get)){
-		get=getch();
+		get=getch();	
 		if(pega_input(get) == 2){
 			move_peca_y(tela->peca,1);
 			mostra_tela(tela);
@@ -30,10 +30,17 @@ int main(){
 			mostra_tela(tela);
 		}
 		if(!tela->peca->move_peca){
+			verifica_linha(tela);
 			libera_peca(tela->peca);
 			nova_peca(tela);
 			mostra_tela(tela);
 		}
+		if(checa_fim(tela)){
+			tela->estado = FINAL;
+			mostra_tela(tela);
+			getch();
+			get = 27;
+		}	
 	}	
 			
 	

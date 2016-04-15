@@ -37,6 +37,7 @@ Tela* cria_tela(){
 void mostra_tela(Tela* t){
 	init_pair(1,COLOR_BLACK,COLOR_BLUE);
 	init_pair(2,COLOR_WHITE,COLOR_BLACK);
+	init_pair(3,COLOR_BLACK,COLOR_WHITE);
 	init_pair(4,COLOR_YELLOW,COLOR_BLACK);
 	init_pair(5,COLOR_BLUE,COLOR_BLACK);
 	init_pair(6,COLOR_RED,COLOR_BLACK);
@@ -69,11 +70,73 @@ void mostra_tela(Tela* t){
 			}
 			/*wprintw(t->janela,"\n");*/
 		}
-		wgetch(t->janela);
-		wclear(t->janela);
 	}
-	else if(t->estado == FINAL){}
+	else if(t->estado == FINAL){
+		bkgd(COLOR_PAIR(3));
+		mvprintw(1,1,"Fim de Jogo :c");
+	}
 	refresh();
+}
+
+void verifica_linha (Tela* t){
+
+	int x, y;
+	int counter = 0;
+
+	for(y = t->comprimento - 1;  y >= 0; y--){
+		for(x = 0; x < t->largura; x++){
+			if (t->blocos[x+y*t->largura].bolinha == 'o'){
+				counter++;
+			}
+		}
+		if (counter == 25){
+			limpa_linha(t, y);
+			desce_linhas(t, y);
+			y++;
+		}
+		counter = 0;
+	}
+}
+
+void limpa_linha (Tela* t, int y){
+
+	int x;
+
+	for (x = 0; x < t->largura; x++){
+		t->blocos[x+y*t->largura].bolinha = ' ';
+		t->blocos[x+y*t->largura].cor = 2;
+	}
+}
+
+void desce_linhas (Tela* t, int y){
+
+	int i,j;
+	int counter=0;
+
+	for(i = y-1;  i >= 0; i--){
+		for(j = 0; j < t->largura; j++){
+			if(t->blocos[j+i*t->largura].bolinha == 'o'){
+				counter++;
+			}
+			t->blocos[j+(i+1)*t->largura].bolinha = t->blocos[j+i*t->largura].bolinha;
+			t->blocos[j+(i+1)*t->largura].cor = t->blocos[j+i*t->largura].cor;
+		}
+		if(counter==0){
+			break;
+		}
+		counter = 0;
+	}
+}
+
+int checa_fim(Tela* t){
+	int i;
+	
+	for(i = 0; i < t->largura; i++){
+		if((t->blocos[i+5*t->largura].bolinha == 'o')&&(!t->blocos[i+5*t->largura].move)){
+			return true;
+		}
+	}
+	return false; 
 }
 
 void destroi_tela(Tela* t){
