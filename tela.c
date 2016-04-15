@@ -37,6 +37,7 @@ Tela* cria_tela(){
 void mostra_tela(Tela* t){
 	init_pair(1,COLOR_BLACK,COLOR_BLUE);
 	init_pair(2,COLOR_WHITE,COLOR_BLACK);
+	init_pair(3,COLOR_BLACK,COLOR_WHITE);
 	init_pair(4,COLOR_YELLOW,COLOR_BLACK);
 	init_pair(5,COLOR_BLUE,COLOR_BLACK);
 	init_pair(6,COLOR_RED,COLOR_BLACK);
@@ -53,7 +54,6 @@ void mostra_tela(Tela* t){
 
 	}
 	else if(t->estado == JOGO){
-
 		bkgd(COLOR_PAIR(2));
 		refresh();
 		wbkgd(t->janela,COLOR_PAIR(2));
@@ -71,19 +71,54 @@ void mostra_tela(Tela* t){
 			/*wprintw(t->janela,"\n");*/
 		}
 	}
-	else if(t->estado == FINAL){}
+	else if(t->estado == FINAL){
+		char tempo_m[15], tempo_s[15], pontos[15];
+		sprintf(tempo_m,"%d",t->tempo_m);
+		sprintf(tempo_s,"%d",t->tempo_s);
+		sprintf(pontos,"%d",t->pontos);
+		bkgd(COLOR_PAIR(3));
+		mvprintw(1,1,"Fim de Jogo :c");
+		mvprintw(2,1,"Pontuação-> ");
+		mvprintw(2,15,pontos);
+		mvprintw(3,1,"Tempo->");
+		mvprintw(3,9,tempo_m);
+		mvprintw(3,11,":");
+		mvprintw(3,13,tempo_s);
+		mvprintw(5,1,"Pressione Qualquer Tecla para finalizar o jogo.");
+	}
 	refresh();
 }
 
-void destroi_tela(Tela* t){
-	free(t);
+void mostra_pontos(int pontos){
+	WINDOW* janela;
+	char str[15];
+	snprintf(str,15,"%d",pontos);
+	janela = newwin(1,20,5,50);
+	wclear(janela);
+	mvwprintw(janela,0,0,"Pontuação:");
+	mvwprintw(janela,0,15,str);
+	wrefresh(janela);	
+}
+
+void mostra_tempo(int minutos,int segundos){
+	WINDOW* janela;
+	char str_m[15],str_s[15];
+	sprintf(str_m,"%d",minutos);
+	sprintf(str_s,"%d",segundos);
+	janela = newwin(1,20,6,50);
+	wclear(janela);
+	mvwprintw(janela,0,0,"Tempo:");
+	mvwprintw(janela,0,10,str_m);
+	mvwprintw(janela,0,12,":");
+	mvwprintw(janela,0,14,str_s);
+	wrefresh(janela);
 }	
 
-
-void verifica_linha (Tela* t){
+int verifica_linha (Tela* t){
 
 	int x, y;
 	int counter = 0;
+	int points = 0;
 
 	for(y = t->comprimento - 1;  y >= 0; y--){
 		for(x = 0; x < t->largura; x++){
@@ -94,10 +129,12 @@ void verifica_linha (Tela* t){
 		if (counter == 25){
 			limpa_linha(t, y);
 			desce_linhas(t, y);
+			points += 100;
 			y++;
 		}
 		counter = 0;
 	}
+	return points;
 }
 
 void limpa_linha (Tela* t, int y){
@@ -130,24 +167,18 @@ void desce_linhas (Tela* t, int y){
 	}
 }
 
-/*int main(){
-	initscr();
-	start_color();
-	Tela* t = cria_tela();
+int checa_fim(Tela* t){
+	int i;
 	
-	
-	t->blocos[4].bolinha = 'o';
-	t->blocos[4].cor = 1;
-	t->blocos[23].bolinha = t->blocos[54].bolinha = t->blocos[100].bolinha = 'o';
-	t->blocos[23].cor = 2; t->blocos[54].cor = 3; t->blocos[100].cor = 4;
-		
-	
-	mostra_tela(t);
-	if(getch()) t->estado = JOGO;
-	mostra_tela(t);
-	getch();
+	for(i = 0; i < t->largura; i++){
+		if((t->blocos[i+5*t->largura].bolinha == 'o')&&(!t->blocos[i+5*t->largura].move)){
+			return true;
+		}
+	}
+	return false; 
+}
 
-	endwin();
-	destroi_tela(t);
-	return 0;
-}*/
+void destroi_tela(Tela* t){
+	free(t);
+}	
+
