@@ -2,8 +2,20 @@
 #include<stdio.h>
 #include"pecas.h"
 #include<sys/timeb.h>
+#include "testes.c"
 
 int main(){
+	if (CUE_SUCCESS != CU_initialize_registry())
+    	return CU_get_error();
+	
+	adiciona_testes();	
+	    	
+    	CU_basic_set_mode(CU_BRM_VERBOSE);
+	/*Roda os testes e mostra na tela os resultados*/
+	CU_basic_run_tests();
+	/*Limpa o registro*/
+	CU_cleanup_registry();
+	
 	inicia_ncurses();
 	Tela* tela = cria_tela();
 	mostra_tela(tela);
@@ -58,7 +70,8 @@ int main(){
 	
 	destroi_tela(tela);
 	finaliza_ncurses();
-
+	
+	return CU_get_error();
 	return 0;
 	
 }

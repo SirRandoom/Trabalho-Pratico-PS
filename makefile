@@ -1,10 +1,13 @@
-all: programa limpa
+all: programa  limpa
 
 programa: pecas.o tela.o engine.o main.o
-	gcc pecas.o tela.o engine.o main.o -o main -lncurses
+	gcc pecas.o tela.o engine.o main.o -o main -lncurses -L./ -lcunit
+
+testes.o: testes.c tela.h tela.c
+	gcc -c testes.c -L./CUnit -lcunit
 
 main.o: main.c engine.h engine.c pecas.h pecas.c tela.h tela.c bloco.h
-	gcc -c main.c -lncurses
+	gcc -c main.c -lncurses -L./CUnit -lcunit
 
 engine.o: engine.c engine.h
 	gcc -c engine.c -lncurses
