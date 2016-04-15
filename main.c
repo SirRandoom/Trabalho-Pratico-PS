@@ -9,7 +9,7 @@ int main(){
 	mostra_tela(tela);
 	struct timeb inicio, atual;
 	int pontos = 0;
-	char get = getch();
+	int get = getch();
 	if(pega_input(get)){
 		tela->estado = JOGO;
 	}
