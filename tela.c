@@ -29,6 +29,8 @@ Tela* cria_tela(){
 				t->blocos[j+i*t->largura].abaixo = NULL;
 		}
 	}
+	t->janela = newwin(t->comprimento + 2, t->largura + 2, 5, 10);
+	box(t->janela, ACS_VLINE, ACS_HLINE);
 	return t;
 }
 
@@ -51,13 +53,15 @@ void mostra_tela(Tela* t){
 
 	}
 	else if(t->estado == JOGO){
-	
-		t->janela = newwin(t->comprimento + 2, t->largura + 2, 5, 10);
-		box(t->janela, ACS_VLINE, ACS_HLINE);
+
 		bkgd(COLOR_PAIR(2));
 		refresh();
 		wbkgd(t->janela,COLOR_PAIR(2));
 		int i,j;
+		mvprintw(11,8,"=>");
+		mvprintw(11,37,"<=");
+		refresh();
+		move(0,0);
 		for(i = 0; i < t->comprimento; i++){
 			for(j = 0; j < t->largura; j++){
 				wattron(t->janela,COLOR_PAIR(t->blocos[j+i*t->largura].cor));

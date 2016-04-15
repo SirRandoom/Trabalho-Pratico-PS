@@ -29,6 +29,11 @@ int main(){
 			move_peca_x(tela->peca,-1);
 			mostra_tela(tela);
 		}
+		if(!tela->peca->move_peca){
+			libera_peca(tela->peca);
+			nova_peca(tela);
+			mostra_tela(tela);
+		}
 	}	
 			
 	
