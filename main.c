@@ -1,6 +1,6 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include"pecas.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "pecas.h"
 
 int main(){
 	inicia_ncurses();
@@ -30,6 +30,7 @@ int main(){
 			mostra_tela(tela);
 		}
 		if(!tela->peca->move_peca){
+			verifica_linha(tela);
 			libera_peca(tela->peca);
 			nova_peca(tela);
 			mostra_tela(tela);

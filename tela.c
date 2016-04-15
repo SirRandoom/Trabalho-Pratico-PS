@@ -79,6 +79,57 @@ void destroi_tela(Tela* t){
 	free(t);
 }	
 
+
+void verifica_linha (Tela* t){
+
+	int x, y;
+	int counter = 0;
+
+	for(y = t->comprimento - 1;  y >= 0; y--){
+		for(x = 0; x < t->largura; x++){
+			if (t->blocos[x+y*t->largura].bolinha == 'o'){
+				counter++;
+			}
+		}
+		if (counter == 25){
+			limpa_linha(t, y);
+			desce_linhas(t, y);
+			y++;
+		}
+		counter = 0;
+	}
+}
+
+void limpa_linha (Tela* t, int y){
+
+	int x;
+
+	for (x = 0; x < t->largura; x++){
+		t->blocos[x+y*t->largura].bolinha = ' ';
+		t->blocos[x+y*t->largura].cor = 2;
+	}
+}
+
+void desce_linhas (Tela* t, int y){
+
+	int i,j;
+	int counter=0;
+
+	for(i = y-1;  i >= 0; i--){
+		for(j = 0; j < t->largura; j++){
+			if(t->blocos[j+i*t->largura].bolinha == 'o'){
+				counter++;
+			}
+			t->blocos[j+(i+1)*t->largura].bolinha = t->blocos[j+i*t->largura].bolinha;
+			t->blocos[j+(i+1)*t->largura].cor = t->blocos[j+i*t->largura].cor;
+		}
+		if(counter==0){
+			break;
+		}
+		counter = 0;
+	}
+}
+
 /*int main(){
 	initscr();
 	start_color();

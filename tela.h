@@ -17,3 +17,6 @@ typedef struct Tela{
 Tela* cria_tela();
 void mostra_tela(Tela* t);
 void destroi_tela(Tela* t);
+void verifica_linha (Tela* t);
+void limpa_linha (Tela* t, int y);
+void desce_linhas (Tela* t, int y);
