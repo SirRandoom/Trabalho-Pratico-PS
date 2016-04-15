@@ -89,23 +89,28 @@ void mostra_tela(Tela* t){
 }
 
 void mostra_pontos(int pontos){
+	WINDOW* janela;
 	char str[15];
 	snprintf(str,15,"%d",pontos);
-	
-	mvprintw(5,50,"Pontuação:");
-	mvprintw(5,65,str);
-	refresh();	
+	janela = newwin(1,20,5,50);
+	wclear(janela);
+	mvwprintw(janela,0,0,"Pontuação:");
+	mvwprintw(janela,0,15,str);
+	wrefresh(janela);	
 }
 
 void mostra_tempo(int minutos,int segundos){
+	WINDOW* janela;
 	char str_m[15],str_s[15];
 	sprintf(str_m,"%d",minutos);
 	sprintf(str_s,"%d",segundos);
-	mvprintw(7,50,"Tempo:");
-	mvprintw(7,60,str_m);
-	mvprintw(7,60+2,":");
-	mvprintw(7,60+3+1,str_s);
-	refresh();
+	janela = newwin(1,20,6,50);
+	wclear(janela);
+	mvwprintw(janela,0,0,"Tempo:");
+	mvwprintw(janela,0,10,str_m);
+	mvwprintw(janela,0,12,":");
+	mvwprintw(janela,0,14,str_s);
+	wrefresh(janela);
 }	
 
 int verifica_linha (Tela* t){

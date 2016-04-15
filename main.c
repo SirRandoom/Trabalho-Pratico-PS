@@ -21,6 +21,7 @@ int main(){
 		ftime(&atual);
 		mostra_tempo((atual.time - inicio.time)/60,(atual.time - inicio.time)%60);		
 		mostra_pontos(pontos);
+		timeout(1000);
 		get=getch();
 	
 		if(pega_input(get) == 2){
