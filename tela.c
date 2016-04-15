@@ -72,16 +72,47 @@ void mostra_tela(Tela* t){
 		}
 	}
 	else if(t->estado == FINAL){
+		char tempo_m[15], tempo_s[15], pontos[15];
+		sprintf(tempo_m,"%d",t->tempo_m);
+		sprintf(tempo_s,"%d",t->tempo_s);
+		sprintf(pontos,"%d",t->pontos);
 		bkgd(COLOR_PAIR(3));
 		mvprintw(1,1,"Fim de Jogo :c");
+		mvprintw(2,1,"Pontuação-> ");
+		mvprintw(2,15,pontos);
+		mvprintw(3,1,"Tempo->");
+		mvprintw(3,9,tempo_m);
+		mvprintw(3,11,":");
+		mvprintw(3,13,tempo_s);
 	}
 	refresh();
 }
 
-void verifica_linha (Tela* t){
+void mostra_pontos(int pontos){
+	char str[15];
+	snprintf(str,15,"%d",pontos);
+	
+	mvprintw(5,50,"Pontuação:");
+	mvprintw(5,65,str);
+	refresh();	
+}
+
+void mostra_tempo(int minutos,int segundos){
+	char str_m[15],str_s[15];
+	sprintf(str_m,"%d",minutos);
+	sprintf(str_s,"%d",segundos);
+	mvprintw(7,50,"Tempo:");
+	mvprintw(7,60,str_m);
+	mvprintw(7,60+2,":");
+	mvprintw(7,60+3+1,str_s);
+	refresh();
+}	
+
+int verifica_linha (Tela* t){
 
 	int x, y;
 	int counter = 0;
+	int points = 0;
 
 	for(y = t->comprimento - 1;  y >= 0; y--){
 		for(x = 0; x < t->largura; x++){
@@ -92,10 +123,12 @@ void verifica_linha (Tela* t){
 		if (counter == 25){
 			limpa_linha(t, y);
 			desce_linhas(t, y);
+			points += 100;
 			y++;
 		}
 		counter = 0;
 	}
+	return points;
 }
 
 void limpa_linha (Tela* t, int y){

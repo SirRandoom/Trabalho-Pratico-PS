@@ -1,22 +1,28 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include"pecas.h"
+#include<sys/timeb.h>
 
 int main(){
 	inicia_ncurses();
 	Tela* tela = cria_tela();
 	mostra_tela(tela);
-	
+	struct timeb inicio, atual;
+	int pontos = 0;
 	char get = getch();
 	if(pega_input(get)){
 		tela->estado = JOGO;
 	}
-	
+	ftime(&inicio);
 	nova_peca(tela);
 	mostra_tela(tela);
 		
 	while(pega_input(get)){
-		get=getch();	
+		ftime(&atual);
+		mostra_tempo((atual.time - inicio.time)/60,(atual.time - inicio.time)%60);		
+		mostra_pontos(pontos);
+		get=getch();
+	
 		if(pega_input(get) == 2){
 			move_peca_y(tela->peca,1);
 			mostra_tela(tela);
@@ -30,13 +36,17 @@ int main(){
 			mostra_tela(tela);
 		}
 		if(!tela->peca->move_peca){
-			verifica_linha(tela);
+			pontos += verifica_linha(tela);
 			libera_peca(tela->peca);
 			nova_peca(tela);
 			mostra_tela(tela);
 		}
 		if(checa_fim(tela)){
+			ftime(&atual);
 			tela->estado = FINAL;
+			tela->pontos = pontos;
+			tela->tempo_m = (atual.time - inicio.time)/60;
+			tela->tempo_s = (atual.time - inicio.time)%60;
 			mostra_tela(tela);
 			getch();
 			get = 27;
