@@ -4,8 +4,13 @@
 
 
 Tela* cria_tela(){
+//Aloca espaço para a Tela, setando os parâmetros logo em seguida
+
 	int i,j;
 	Tela* t = malloc(sizeof(Tela) + COMPRIMENTO*LARGURA*sizeof(bloco));
+
+//Monta os blocos atualizando as referências
+//O matriz de bloco foi montado em um vetor, então a posição (i,j) é acessada como j + i*largura
 	t->comprimento = COMPRIMENTO;
 	t->largura = LARGURA;
 	t->estado = INICIO;	
@@ -29,12 +34,15 @@ Tela* cria_tela(){
 				t->blocos[j+i*t->largura].abaixo = NULL;
 		}
 	}
+//A janela presente em Tela consiste apenas da tela do Tetris e não a do Terminal
 	t->janela = newwin(t->comprimento + 2, t->largura + 2, 5, 10);
 	box(t->janela, ACS_VLINE, ACS_HLINE);
 	return t;
 }
 
 void mostra_tela(Tela* t){
+
+//Inicia os Pares de cor
 	init_pair(1,COLOR_BLACK,COLOR_BLUE);
 	init_pair(2,COLOR_WHITE,COLOR_BLACK);
 	init_pair(3,COLOR_BLACK,COLOR_WHITE);
@@ -46,6 +54,7 @@ void mostra_tela(Tela* t){
 	
 	clear();
 	refresh();	
+//Define a tela inicial do jogo
 	if(t->estado == INICIO){
 		
 		bkgd(COLOR_PAIR(1));
@@ -53,6 +62,7 @@ void mostra_tela(Tela* t){
 		printw("Pressione Qualquer Tecla Para Iniciar o Jogo.");
 
 	}
+//Define a tela do jogo, mostrando a janela do Tetris e as informações do jogo
 	else if(t->estado == JOGO){
 		bkgd(COLOR_PAIR(2));
 		refresh();
@@ -71,6 +81,7 @@ void mostra_tela(Tela* t){
 			/*wprintw(t->janela,"\n");*/
 		}
 	}
+//Define a tela de fim, mostrando as informações do final do jogo
 	else if(t->estado == FINAL){
 		char tempo_m[15], tempo_s[15], pontos[15];
 		sprintf(tempo_m,"%d",t->tempo_m);

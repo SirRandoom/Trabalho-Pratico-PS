@@ -1,5 +1,6 @@
 #include "engine.h"
 
+//Função responsável por iniciar a ncurses
 void inicia_ncurses(){
 	initscr();
 	start_color();
@@ -8,10 +9,12 @@ void inicia_ncurses(){
 //	noecho();
 }
 
+//Função responsável por finalizar a ncurses
 void finaliza_ncurses(){
 	endwin();
 }
 
+//Função que interpreta uma entrada do teclado
 int pega_input(int input){
 	switch(input){
 	case KEY_DOWN:
