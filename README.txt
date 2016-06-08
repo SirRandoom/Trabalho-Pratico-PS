@@ -1,5 +1,6 @@
 Alunos: 
 	Luís Felipe de Melo Nunes - 11/0129849 - Usuário Git: SirRandoom
+	Luís Fernando Mendes Cury - 15/0041292 - Usuário Git: lfmc
 	Rafael Koji - 11/0137078 - Usuário Git: RafaelKoji
 
 Reposítório GitHub:
