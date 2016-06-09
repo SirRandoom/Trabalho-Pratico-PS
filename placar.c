@@ -22,12 +22,9 @@ void cria_placar(){
 		char* nova_pontuacao = NULL, *novo_tempo_m = NULL, *novo_tempo_s = NULL;
 		while((c = fgetc(score->arquivo)) != EOF){
 			if(c == '\n'){
-				fputs(pontuacao,Debug);
-				fputc('\t',Debug);
-				fputs(tempo_m,Debug);
-				fputc('\t',Debug);
-				fputs(tempo_s,Debug);
-				fputc('\n',Debug);
+				fprintf(Debug,"%s\t",pontuacao);
+				fprintf(Debug,"%s\t",tempo_m);
+				fprintf(Debug,"%s\n",tempo_s);
 				score->pontuacoes[score->contador_jogadores] = (int) strtol(pontuacao, NULL, 10);
 				score->tempos_m[score->contador_jogadores] = (int) strtol(tempo_m,NULL,10);
 				score->tempos_s[score->contador_jogadores] = (int) strtol(tempo_s,NULL,10);
@@ -35,9 +32,12 @@ void cria_placar(){
 				tabulacoes = 0;
 				caracteres = 0;
 				min = sec = 0;
-				free(pontuacao);
-				free(tempo_m);
-				free(tempo_s);
+				pontuacao = NULL;
+				tempo_m = NULL;
+				tempo_s = NULL;
+				nova_pontuacao = NULL;
+				novo_tempo_m = NULL;
+				novo_tempo_s = NULL;
 				continue;
 			}
 			if(c == '\t'){
@@ -88,23 +88,59 @@ void cria_placar(){
 			caracteres++;
 			
 		}
+		free(pontuacao);
+		free(tempo_m);
+		free(tempo_s);
+		free(nova_pontuacao);
+		free(novo_tempo_m);
+		free(novo_tempo_s);
+				
 	}
+	
 	fclose(score->arquivo);  
 }
 
 void atualiza_placar(int pontuacao){
-	extern char* jogador;
-	extern int tempo_s, tempo_m;
 	
-	cria_placar();
+	int i, indice = score->contador_jogadores;
+	for(i = score->contador_jogadores-1; i >= 0 ; i--){
+		if(pontuacao > score->pontuacoes[i]){
+			indice = i;
+		}
+	}
 	
-	score->arquivo = fopen("texte.txt","w");
-	char* valor;
-	sprintf(valor,"%d",score->tempos_m[2]);
-	fputs(valor,score->arquivo);
+	for(i = score->contador_jogadores-1; i >= indice; i--){
+		if(i!=4){
+			strcpy(score->jogadores[i+1],score->jogadores[i]);
+			score->pontuacoes[i+1] = score->pontuacoes[i];
+			score->tempos_m[i+1] = score->tempos_m[i];
+			score->tempos_s[i+1] = score->tempos_s[i];
+		}
+	}
 	
+	if(indice!=5){
+		strcpy(score->jogadores[indice],"POP");
+		score->pontuacoes[indice] = pontuacao;
+		score->tempos_m[indice] = score->tela->tempo_m;
+		score->tempos_s[indice] = score->tela->tempo_s;
+	}
+	
+	if(score->contador_jogadores != 5){
+		score->contador_jogadores++;
+	}
+	
+	score->arquivo = fopen("pontuacao.txt","w");
+	
+	for(i = 0; i < score->contador_jogadores; i++){
+		fprintf(score->arquivo,"%s\t%d\t/%d:%d\n",score->jogadores[i],score->pontuacoes[i],score->tempos_m[i],score->tempos_s[i]);
+	}
+	
+	fclose(score->arquivo);
 }
 
+void seta_Tela(Tela *t){
+	score->tela = t;
+}
 
 
 void destroi_placar(){

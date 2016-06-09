@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"engine.h"
+#include"tela.h"
 
 typedef struct placar{
 	char jogadores[5][4];
@@ -9,9 +10,13 @@ typedef struct placar{
 	int tempos_s[5];
 	int contador_jogadores;
 	FILE *arquivo;
+	Tela* tela;
 }placar;
+
+
 
 void cria_placar();
 void atualiza_placar(int pontuacao);
 void mostra_placar();
 void destroi_placar();
+void seta_Tela(Tela *t);
