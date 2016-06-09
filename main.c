@@ -55,6 +55,7 @@ int main(){
 			mostra_tela(tela);
 		}
 		if(checa_fim(tela)){
+			atualiza_placar(0);
 			ftime(&atual);
 			tela->estado = FINAL;
 			tela->pontos = pontos;
