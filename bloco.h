@@ -1,15 +1,20 @@
-//Struct que define os blocos da Tela
+/** \file */
+
+/** \struct Bloco*/
 
 typedef struct Bloco{
-	char bolinha; //caracter atual do bloco
-	unsigned short int cor; //cor do bloco
-	int pos_x, pos_y; // posições cartesianas do bloco
-	unsigned short int move; //boleano que verifica se o bloco está em movimento
-	struct Bloco* esquerda; 
-	struct Bloco* direita;
-	struct Bloco* abaixo;
+  char bolinha; /**< Caractere atual da peça. */
+  unsigned short int cor; /**< Cor da peça. */
+  int pos_x; /**<Coordenada cartesiana horizontal do bloco.*/
+  int pos_y; /**< Coordenada cartesiana vertical do bloco.*/
+  unsigned short int move; /**< Valor booleano que indica se o bloco está em movimento ou não.*/
+  struct Bloco* esquerda; /**<Ponteiro para vizinho à esquerda.*/
+  struct Bloco* direita; /**<Ponteiro para vizinho à direita.*/
+  struct Bloco* abaixo; /**<Ponteiro para vizinho abaixo.*/
 }bloco;
 
+/** \def COMPRIMENTO Comprimento do mapa.*/
 #define COMPRIMENTO 15
+/** \def LARGURA Largura do mapa.*/
 #define LARGURA 25
 

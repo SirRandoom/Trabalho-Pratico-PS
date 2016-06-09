@@ -1,14 +1,21 @@
+/** \file */
+
 #include "pecas.h"
 #include <time.h>
 
-//Par de cores das peças variam entre 4~7
+/** Par de cores das peças variam entre 4 e 7.*/
 unsigned short int cor_nova_peca = 4;
+
+/** Gera nova peça do jogo. Orientação e tamanho são dados de forma pseudoaleatória.
+    A cor é dada de forma cíclica.
+    \param tela Ponteiro para tela de jogo.
+*/
 
 void nova_peca(Tela* tela){
 	srand(time(NULL));
 	int i;
-	int orientacao = rand()%2;
-	int tamanho = rand()%3 + 3;
+	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
+	int tamanho = rand()%3 + 3; /**<Indica o tamanho da peça*/
 
 	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
 
@@ -16,8 +23,6 @@ void nova_peca(Tela* tela){
 	p->cor_peca = cor_nova_peca;
 	p->move_peca = 1;
 
-//Orientação vertical = 1; Orientação horizontal = 0
-//Associa os blocos da tela que irão fazer parte da peça
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
 			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
@@ -37,13 +42,16 @@ void nova_peca(Tela* tela){
 	cor_nova_peca++;
 	tela->peca = p;
 }
-	
+
+/** Movimenta a peça no eixo x, ou seja no sentido horizontal.
+    \param p A peça a ser movimentada.
+    \param x Indica a direção do movimento. Se positivo, para a direita. Se negativo, para a esquerda.
+*/
 void move_peca_x(peca* p, int x){
 
 	unsigned short int colisao = 0;
 	int i;
 
-// Movimento para direita: x>0;  Movimento para esquerda: x<0
 	switch(x){
 		case 1:
 			for (i = 0; i < p->tamanho; i++){
@@ -102,19 +110,15 @@ void move_peca_x(peca* p, int x){
 	}
 }
 
+/** Movimenta a peça no eixo y, ou seja, na direção vertical.
+    \param p Peça a ser movida.
+    \param y Sempre deve ser positivo, pois a peça só pode se movimentar para baixo.
+*/
 void move_peca_y(peca* p, int y){
 
 	int i;
 	unsigned short int colisao = 0;
 	unsigned short int limite_inferior =0;
-// A peça não pode se mover para cima.
-// A variável Y cresce para baixo, ou seja, y deve ser maior que 0.
-
-// Se os blocos estejam tentando se mover para uma posição ocupada
-// por blocos estáticos ou os limites de tela ele não irá se mover.
-// Caso contrário os blocos atuais da peça são "limpos" e 
-// os ponteiros da peça e as informações dos novos blocos
-// são atualizados.
 
 	if (y>0){
 		for (i = 0; i < p->tamanho; i++){
@@ -154,6 +158,10 @@ void move_peca_y(peca* p, int y){
 	}
 
 }
+
+/** Libera a memória alocada para a peça.
+    \param p Ponteiro para a peça a ser liberada.
+*/
 
 void libera_peca(peca* p){
 	free(p);

@@ -1,6 +1,8 @@
+/** \file */
+
 #include "engine.h"
 
-//Função responsável por iniciar a ncurses
+/**Inicializa o modo ncurses e determina as funcionalidades dele que serão usadas.*/
 void inicia_ncurses(){
 	initscr();
 	start_color();
@@ -9,12 +11,15 @@ void inicia_ncurses(){
 //	noecho();
 }
 
-//Função responsável por finalizar a ncurses
+/**Finaliza o modo ncurses.*/
 void finaliza_ncurses(){
 	endwin();
 }
 
-//Função que interpreta uma entrada do teclado
+/**Determina como interpretar a entrada do teclado.
+   \param input Entrada.
+   \return Saída convertida.
+*/
 int pega_input(int input){
 	switch(input){
 	case KEY_DOWN:
