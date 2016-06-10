@@ -1,16 +1,16 @@
+/** \file */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "tela.h"
 
-
+/**Cria uma tela de jogo com os parâmetros corretos.
+   \return Retorna um ponteiro para tal tela.*/
 Tela* cria_tela(){
-//Aloca espaço para a Tela, setando os parâmetros logo em seguida
 
 	int i,j;
 	Tela* t = malloc(sizeof(Tela) + COMPRIMENTO*LARGURA*sizeof(bloco));
 
-//Monta os blocos atualizando as referências
-//O matriz de bloco foi montado em um vetor, então a posição (i,j) é acessada como j + i*largura
 	t->comprimento = COMPRIMENTO;
 	t->largura = LARGURA;
 	t->estado = INICIO;	
@@ -34,15 +34,19 @@ Tela* cria_tela(){
 				t->blocos[j+i*t->largura].abaixo = NULL;
 		}
 	}
-//A janela presente em Tela consiste apenas da tela do Tetris e não a do Terminal
+
 	t->janela = newwin(t->comprimento + 2, t->largura + 2, 5, 10);
 	box(t->janela, ACS_VLINE, ACS_HLINE);
 	return t;
 }
 
+/**Mostra a tela de jogo, conforme seu atual estado.
+   Também inicializa os pares de cores a serem utilizados.
+   \param t Ponteiro para tela a ser mostrada.
+*/
+
 void mostra_tela(Tela* t){
 
-//Inicia os Pares de cor
 	init_pair(1,COLOR_BLACK,COLOR_BLUE);
 	init_pair(2,COLOR_WHITE,COLOR_BLACK);
 	init_pair(3,COLOR_BLACK,COLOR_WHITE);
@@ -54,7 +58,7 @@ void mostra_tela(Tela* t){
 	
 	clear();
 	refresh();	
-//Define a tela inicial do jogo
+
 	if(t->estado == INICIO){
 		
 		bkgd(COLOR_PAIR(1));
@@ -62,7 +66,7 @@ void mostra_tela(Tela* t){
 		printw("Pressione Qualquer Tecla Para Iniciar o Jogo.");
 
 	}
-//Define a tela do jogo, mostrando a janela do Tetris e as informações do jogo
+
 	else if(t->estado == JOGO){
 		bkgd(COLOR_PAIR(2));
 		refresh();
@@ -81,7 +85,7 @@ void mostra_tela(Tela* t){
 			/*wprintw(t->janela,"\n");*/
 		}
 	}
-//Define a tela de fim, mostrando as informações do final do jogo
+
 	else if(t->estado == FINAL){
 		char tempo_m[15], tempo_s[15], pontos[15];
 		sprintf(tempo_m,"%d",t->tempo_m);
@@ -100,6 +104,9 @@ void mostra_tela(Tela* t){
 	refresh();
 }
 
+/** Mostra a pontuação do jogados.
+    \param pontos O escore atual.
+*/
 void mostra_pontos(int pontos){
 	WINDOW* janela;
 	char str[15];
@@ -111,6 +118,10 @@ void mostra_pontos(int pontos){
 	wrefresh(janela);	
 }
 
+/** Mostra o tempo da partida.
+    \param minutos Tempo em minutos.
+    \param segundos Tempo em segundos.
+*/
 void mostra_tempo(int minutos,int segundos){
 	WINDOW* janela;
 	char str_m[15],str_s[15];
@@ -124,6 +135,11 @@ void mostra_tempo(int minutos,int segundos){
 	mvwprintw(janela,0,14,str_s);
 	wrefresh(janela);
 }	
+
+/** Verifica se uma linha horizontal do jogo está completamente preenchida.
+    \param t Ponteiro para a tela do jogo.
+    \return 100 se a linha estiver preenchida. 0 caso contrário.
+*/
 
 int verifica_linha (Tela* t){
 
@@ -148,6 +164,10 @@ int verifica_linha (Tela* t){
 	return points;
 }
 
+/** Limpa uma determinada linha do jogo.
+    \param t Ponteiro para a tela do jogo.
+    \param y Posição da linha a ser eliminada.
+*/
 void limpa_linha (Tela* t, int y){
 
 	int x;
@@ -157,6 +177,11 @@ void limpa_linha (Tela* t, int y){
 		t->blocos[x+y*t->largura].cor = 2;
 	}
 }
+
+/**Desce determinada linha da tela.
+   \param t Ponteiro para a tela de jogo.
+   \param y Posição para a linha.
+*/
 
 void desce_linhas (Tela* t, int y){
 
@@ -178,6 +203,10 @@ void desce_linhas (Tela* t, int y){
 	}
 }
 
+/** Verifica se as peças ultrapassaram o limite superior do jogo.
+    \param t Ponteiro para a tela de jogo.
+    \return Verdadeiro se ultrapassou o limite. Falso caso contrário.
+*/
 int checa_fim(Tela* t){
 	int i;
 	
@@ -189,6 +218,9 @@ int checa_fim(Tela* t){
 	return false; 
 }
 
+/** Libera o espaço de memória reservado para a tela de jogo.
+    \param t Ponteiro para a tela de jogo.
+*/
 void destroi_tela(Tela* t){
 	free(t);
 }	

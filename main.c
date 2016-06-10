@@ -55,12 +55,16 @@ int main(){
 			mostra_tela(tela);
 		}
 		if(checa_fim(tela)){
+			cria_placar();
+			seta_Tela(tela);
 			ftime(&atual);
 			tela->estado = FINAL;
 			tela->pontos = pontos;
 			tela->tempo_m = (atual.time - inicio.time)/60;
 			tela->tempo_s = (atual.time - inicio.time)%60;
+			atualiza_placar(tela->pontos);
 			mostra_tela(tela);
+			mostra_placar();
 			timeout(-1);
 			getch();
 			get = KEY_F(4);
