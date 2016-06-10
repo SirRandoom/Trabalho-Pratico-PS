@@ -64,6 +64,7 @@ int main(){
 			tela->tempo_s = (atual.time - inicio.time)%60;
 			atualiza_placar(tela->pontos);
 			mostra_tela(tela);
+			mostra_placar();
 			timeout(-1);
 			getch();
 			get = KEY_F(4);

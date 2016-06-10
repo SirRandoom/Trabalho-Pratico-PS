@@ -119,7 +119,7 @@ void atualiza_placar(int pontuacao){
 	}
 	
 	if(indice!=5){
-		strcpy(score->jogadores[indice],"POP");
+		strcpy(score->jogadores[indice],"LUA");
 		score->pontuacoes[indice] = pontuacao;
 		score->tempos_m[indice] = score->tela->tempo_m;
 		score->tempos_s[indice] = score->tela->tempo_s;
@@ -136,6 +136,19 @@ void atualiza_placar(int pontuacao){
 	}
 	
 	fclose(score->arquivo);
+}
+
+void mostra_placar(){
+	WINDOW *janela;
+	janela = newwin(score->contador_jogadores+2,30,8,25);
+	wbkgd(janela,COLOR_PAIR(3));
+	box(janela, ACS_VLINE, ACS_HLINE);
+	mvwprintw(janela,0,12,"Placar");
+	int i;
+	for(i = 0; i < score->contador_jogadores; i++){
+		mvwprintw(janela,i+1,1,"%s\t%d\t/%d:%d",score->jogadores[i],score->pontuacoes[i],score->tempos_m[i],score->tempos_s[i]);
+	}
+	wrefresh(janela);
 }
 
 void seta_Tela(Tela *t){
