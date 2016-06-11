@@ -13,7 +13,9 @@ Tela* cria_tela(){
 
 	t->comprimento = COMPRIMENTO;
 	t->largura = LARGURA;
-	t->estado = INICIO;	
+	t->estado = INICIO;
+	strcpy(t->jogador, "AAA");
+	t->letra = 0;	
 	for(i=0; i < t->comprimento; i++){
 		for(j=0; j < t->largura; j++){
 			t->blocos[j+i*t->largura].bolinha = ' ';
@@ -225,3 +227,21 @@ void destroi_tela(Tela* t){
 	free(t);
 }	
 
+/** Estado da tela onde o jogador escolhe o seu apelido*/
+void define_jogador(Tela* t){
+	clear();
+	mvprintw(1,3,"Defina seu apelido (utilize as setas para alterar as letras e pressione ENTER quando pronto)");
+	mvprintw(5,30,"%c      %c      %c",t->jogador[0],t->jogador[1],t->jogador[2]);
+	mvprintw(6,30+t->letra*7,"_");
+	refresh();	
+}
+
+/**Função que altera a atual letra selecionada para escolha do apelido*/
+void troca_letra(Tela* t,int valor){
+	t->letra += valor;
+}
+
+/**Função que alatera o caractér da atual letra selecionada para escolha do apelido*/
+void muda_letra(Tela* t,int valor){
+	t->jogador[t->letra] += valor;
+}
