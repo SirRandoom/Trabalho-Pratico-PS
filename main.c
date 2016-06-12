@@ -74,7 +74,6 @@ int main(){
 		}
 		if(checa_fim(tela)){
 			cria_placar();
-			seta_Tela(tela);
 			ftime(&atual);
 			tela->estado = FINAL;
 			tela->pontos = pontos;
@@ -120,6 +119,7 @@ int main(){
 					}
 				}
 			}
+			seta_jogador(tela);
 			atualiza_placar(tela->pontos);
 			mostra_tela(tela);
 			mostra_placar();			

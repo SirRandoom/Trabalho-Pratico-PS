@@ -1,7 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
 #include "placar.h"
-#include<string.h>
 
 static placar *score;
 
@@ -121,10 +118,10 @@ void atualiza_placar(int pontuacao){
 	}
 	
 	if(indice!=5){
-		strcpy(score->jogadores[indice],score->tela->jogador);
+		strcpy(score->jogadores[indice],score->jogador);
 		score->pontuacoes[indice] = pontuacao;
-		score->tempos_m[indice] = score->tela->tempo_m;
-		score->tempos_s[indice] = score->tela->tempo_s;
+		score->tempos_m[indice] = score->tempo_m;
+		score->tempos_s[indice] = score->tempo_s;
 	}
 	
 	if(score->contador_jogadores != 5){
@@ -154,9 +151,12 @@ void mostra_placar(){
 	wrefresh(janela);
 }
 
-/** Função settle de tela (temporário(?))*/
-void seta_Tela(Tela *t){
-	score->tela = t;
+/** Função settle dos parâmetros do jogador atual*/
+void seta_jogador(Tela *t){
+	strcpy(score->jogador,t->jogador);
+	score->pontuacao = t->pontos;
+	score->tempo_m = t->tempo_m;
+	score->tempo_s = t->tempo_s;
 }
 
 /** Função responsável por desalocar a memória do placar*/
