@@ -23,7 +23,6 @@ int main(){
 	Tela* tela = cria_tela();
 	mostra_tela(tela);
 	struct timeb inicio, atual, peca_drop;
-	clock_t counter_inicio, counter_atual;
 
 	int teste = 0;
 
@@ -36,30 +35,18 @@ int main(){
 	ftime(&inicio);
 	ftime(&peca_drop);
 	nova_peca(tela);
-	tela->blocos[0].bolinha = 'o';
-	tela->blocos[0].cor = 5;
 	mostra_tela(tela);
 		
 	while(pega_input(get)){
 		ftime(&atual);
 		mostra_tempo((atual.time - inicio.time)/60,(atual.time - inicio.time)%60);		
 		mostra_pontos(pontos);
-		timeout(1000);
+		timeout(60);
 		get=getch();
 	
 		if(tela->estado = JOGO){
 			if(pega_input(get) == 2){
 				speed_up(tela->peca, 1);
-				if(teste=0){
-				tela->blocos[0].cor = 5;
-				tela->blocos[0].bolinha = ' ';
-				teste = 1;
-				
-				}else{
-				tela->blocos[0].bolinha = 'o';
-				tela->blocos[0].cor = 5;
-				teste = 0;
-				}
 				mostra_tela(tela);
 			}
 			if(pega_input(get) == 3){
@@ -75,7 +62,7 @@ int main(){
 				mostra_tela(tela);
 			}
 			float time = atual.time - peca_drop.time + 0.001*(atual.millitm - peca_drop.millitm);
-			if(time < tela->peca->velocidade){
+			if(time >= 1/tela->peca->velocidade){
 				move_peca_y(tela->peca,1);
 				ftime(&peca_drop);
 				mostra_tela(tela);
@@ -84,7 +71,6 @@ int main(){
 				pontos += verifica_linha(tela);
 				libera_peca(tela->peca);
 				nova_peca(tela);
-				counter_inicio = clock();
 				mostra_tela(tela);
 			}
 		}
@@ -139,26 +125,6 @@ int main(){
 			getch();
 			destroi_placar();
 			get = KEY_F(4);
-		}
-
-		counter_atual = clock();
-		tempo_percorrido = ((double) (counter_atual - counter_inicio)) / CLOCKS_PER_SEC;	
-
-		if(tempo_percorrido >= 1/tela->peca->velocidade){
-			move_peca_y(tela->peca,1);
-			counter_inicio = clock();
-			/*if(teste=0){
-				tela->blocos[0].bolinha = 'o';
-				tela->blocos[0].cor = 5;
-				teste = 1;
-			}else{
-				tela->blocos[0].cor = 5;
-				tela->blocos[0].bolinha = ' ';
-				teste = 0;
-			}*/
-			mostra_tela(tela);
-
-			
 		}
 	}	
 			

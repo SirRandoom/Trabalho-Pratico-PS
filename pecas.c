@@ -6,12 +6,15 @@
 /** Par de cores das peças variam entre 4 e 7.*/
 unsigned short int cor_nova_peca = 4;
 
+unsigned short int speed_ups = 0;
+
 /** Gera nova peça do jogo. Orientação e tamanho são dados de forma pseudoaleatória.
     A cor é dada de forma cíclica.
     \param tela Ponteiro para tela de jogo.
 */
 
 void nova_peca(Tela* tela){
+	speed_ups = 0;
 	srand(time(NULL));
 	int tipo = rand()%5; /**<Indica o tipo da peça*/
 
@@ -441,13 +444,12 @@ void rotaciona_peca(peca* peca){
 	}
 }
 
+/** Dobra a velocidade de queda das peças só pode ser utilizada 5 vezes*/
 void speed_up (peca* peca, int y){
 
-	peca->velocidade = peca->velocidade *2;
-	if(peca->cor_peca==4){
-		peca->cor_peca = 5; 
-	}else{
-		peca->cor_peca = 4;
+	if(speed_ups<5){
+		peca->velocidade = peca->velocidade *2;
+		speed_ups++;
 	}
 	
 
