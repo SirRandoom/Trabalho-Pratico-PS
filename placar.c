@@ -5,6 +5,7 @@
 
 static placar *score;
 
+/**Função responsável pela criação do placar, abrindo o arquivo pontuacao.txt, ou criando-o caso não exista, e carregando suas informações na variável score do módulo*/
 void cria_placar(){
 	score = malloc(sizeof(placar));
 	score->contador_jogadores = 0;
@@ -100,6 +101,7 @@ void cria_placar(){
 	fclose(score->arquivo);  
 }
 
+/** Função responsável por atualizar o placar, com ordenamento por critério de maior pontuação, excluindo o jogador de menor pontuação do placar caso o número de jogadores atinja o máximo de 5 jogadores*/
 void atualiza_placar(int pontuacao){
 	
 	int i, indice = score->contador_jogadores;
@@ -119,7 +121,7 @@ void atualiza_placar(int pontuacao){
 	}
 	
 	if(indice!=5){
-		strcpy(score->jogadores[indice],"LUA");
+		strcpy(score->jogadores[indice],score->tela->jogador);
 		score->pontuacoes[indice] = pontuacao;
 		score->tempos_m[indice] = score->tela->tempo_m;
 		score->tempos_s[indice] = score->tela->tempo_s;
@@ -138,6 +140,7 @@ void atualiza_placar(int pontuacao){
 	fclose(score->arquivo);
 }
 
+/** Função responsável por mostrar o placar ao final do jogo*/
 void mostra_placar(){
 	WINDOW *janela;
 	janela = newwin(score->contador_jogadores+2,30,8,25);
@@ -151,11 +154,12 @@ void mostra_placar(){
 	wrefresh(janela);
 }
 
+/** Função settle de tela (temporário(?))*/
 void seta_Tela(Tela *t){
 	score->tela = t;
 }
 
-
+/** Função responsável por desalocar a memória do placar*/
 void destroi_placar(){
 	free(score);
 }
