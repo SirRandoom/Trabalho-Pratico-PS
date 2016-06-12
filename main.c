@@ -22,7 +22,7 @@ int main(){
 	inicia_ncurses();
 	Tela* tela = cria_tela();
 	mostra_tela(tela);
-	struct timeb inicio, atual;
+	struct timeb inicio, atual, peca_drop;
 	clock_t counter_inicio, counter_atual;
 
 	int teste = 0;
@@ -34,6 +34,7 @@ int main(){
 		tela->estado = JOGO;
 	}
 	ftime(&inicio);
+	ftime(&peca_drop);
 	nova_peca(tela);
 	tela->blocos[0].bolinha = 'o';
 	tela->blocos[0].cor = 5;
@@ -71,6 +72,12 @@ int main(){
 			}
 			if(pega_input(get) == 5){
 				rotaciona_peca(tela->peca);
+				mostra_tela(tela);
+			}
+			float time = atual.time - peca_drop.time + 0.001*(atual.millitm - peca_drop.millitm);
+			if(time < tela->peca->velocidade){
+				move_peca_y(tela->peca,1);
+				ftime(&peca_drop);
 				mostra_tela(tela);
 			}
 			if(!tela->peca->move_peca){
