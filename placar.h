@@ -19,9 +19,6 @@ typedef struct placar{
 	int pontuacao; //pontuacao do jogador atual
 	int tempo_m; //tempo em minutos do jogador atual
 	int tempo_s; //tempo em segundos do jogador atual
-	int ano; //ano do jogador atual
-	int mes; //mes do jogador atual
-	int dia; //dia do jogador atual
 }placar;
 
 
