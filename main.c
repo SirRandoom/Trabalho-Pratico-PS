@@ -1,7 +1,8 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include"pecas.h"
-#include<sys/timeb.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "pecas.h"
+#include <sys/timeb.h>
+#include <time.h>
 #include "testes.c"
 
 int main(){
@@ -20,6 +21,8 @@ int main(){
 	Tela* tela = cria_tela();
 	mostra_tela(tela);
 	struct timeb inicio, atual;
+	clock_t counter_inicio, counter_atual;
+	double tempo_percorrido;  //Tempo em segundos
 	int pontos = 0;
 	int get = getch();
 	if(pega_input(get)){
@@ -38,6 +41,7 @@ int main(){
 	
 		if(pega_input(get) == 2){
 			move_peca_y(tela->peca,1);
+			speed_up(tela->peca, 1);
 			mostra_tela(tela);
 		}
 		if(pega_input(get) == 3){
@@ -48,10 +52,15 @@ int main(){
 			move_peca_x(tela->peca,-1);
 			mostra_tela(tela);
 		}
+		if(pega_input(get) == 5){
+			rotaciona_peca(tela->peca);
+			mostra_tela(tela);
+		}
 		if(!tela->peca->move_peca){
 			pontos += verifica_linha(tela);
 			libera_peca(tela->peca);
 			nova_peca(tela);
+			counter_inicio = clock();
 			mostra_tela(tela);
 		}
 		if(checa_fim(tela)){
@@ -68,7 +77,16 @@ int main(){
 			timeout(-1);
 			getch();
 			get = KEY_F(4);
-		}	
+		}
+
+		counter_atual = clock();
+		tempo_percorrido = ((double) (counter_atual - counter_inicio)) / CLOCKS_PER_SEC;	
+
+		/*if(tempo_percorrido >= 1/tela->peca->velocidade){
+			move_peca_y(tela->peca,1);
+			counter_inicio = clock();
+			mostra_tela(tela);
+		}*/
 	}	
 			
 	

@@ -6,18 +6,7 @@
 
 void adiciona_testes(void);
 
-<<<<<<< HEAD
-void teste_VerificaCriaTela(void);
-void teste_VerificaComprimentoTela(void);
-void teste_VerificaLarguraTela(void);
-void teste_VerificaNovaTela(void);
-void teste_VerificaMovePecaDireita(void);
-void teste_VerificaMovePecaEsquerda(void);
-void teste_VerificaMovePecaBaixo(void);
-void teste_VerificaTeclaDireita(void);
-void teste_VerificaTeclaEsquerda(void);
-void teste_VerificaTeclaBaixo(void);
-=======
+
 void teste_VerificaCriaTela(void); //Teste que verifica se o ponteiro de tela foi criado
 void teste_VerificaComprimentoTela(void); //Teste que verifica se o comprimento da Tela criada está correto
 void teste_VerificaLarguraTela(void); //Teste que verifica se a largura da Tela criada está correto
@@ -28,7 +17,6 @@ void teste_VerificaMovePecaBaixo(void); //Teste que verifica se a peça se movim
 void teste_VerificaTeclaDireita(void); //Teste que verifica se a leitura da tecla "seta" direita foi realizada corretamente
 void teste_VerificaTeclaEsquerda(void); //Teste que verifica se a leitura da tecla "seta" esquerda foi realizada corretamente
 void teste_VerificaTeclaBaixo(void); // Teste que verifica se a leitura da tecla "seta" baixo foi realizada corretamente
->>>>>>> 72af0d3d091e5e37306af7aa0379ad25a53b1ee3
 
 void teste_VerificaCriaTela(void){
 	Tela* tela = cria_tela();

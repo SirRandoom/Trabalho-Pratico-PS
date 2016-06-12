@@ -32,6 +32,10 @@ Tela* cria_tela(){
 				t->blocos[j+i*t->largura].abaixo = &(t->blocos[j+(i+1)*t->largura]);
 			else
 				t->blocos[j+i*t->largura].abaixo = NULL;
+			if(i!=0)
+				t->blocos[j+i*t->largura].acima = &(t->blocos[j+(i-1)*t->largura]);
+			else
+				t->blocos[j+i*t->largura].acima = NULL;
 		}
 	}
 
