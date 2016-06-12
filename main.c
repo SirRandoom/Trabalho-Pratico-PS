@@ -5,6 +5,8 @@
 #include <time.h>
 #include "testes.c"
 
+
+
 int main(){
 	if (CUE_SUCCESS != CU_initialize_registry())
     	return CU_get_error();
@@ -22,6 +24,9 @@ int main(){
 	mostra_tela(tela);
 	struct timeb inicio, atual;
 	clock_t counter_inicio, counter_atual;
+
+	int teste = 0;
+
 	double tempo_percorrido;  //Tempo em segundos
 	int pontos = 0;
 	int get = getch();
@@ -30,6 +35,8 @@ int main(){
 	}
 	ftime(&inicio);
 	nova_peca(tela);
+	tela->blocos[0].bolinha = 'o';
+	tela->blocos[0].cor = 5;
 	mostra_tela(tela);
 		
 	while(pega_input(get)){
@@ -38,12 +45,20 @@ int main(){
 		mostra_pontos(pontos);
 		timeout(1000);
 		get=getch();
-<<<<<<< HEAD
 	
 		if(tela->estado = JOGO){
 			if(pega_input(get) == 2){
-				move_peca_y(tela->peca,1);
 				speed_up(tela->peca, 1);
+				if(teste=0){
+				tela->blocos[0].cor = 5;
+				tela->blocos[0].bolinha = ' ';
+				teste = 1;
+				
+				}else{
+				tela->blocos[0].bolinha = 'o';
+				tela->blocos[0].cor = 5;
+				teste = 0;
+				}
 				mostra_tela(tela);
 			}
 			if(pega_input(get) == 3){
@@ -122,11 +137,22 @@ int main(){
 		counter_atual = clock();
 		tempo_percorrido = ((double) (counter_atual - counter_inicio)) / CLOCKS_PER_SEC;	
 
-		/*if(tempo_percorrido >= 1/tela->peca->velocidade){
+		if(tempo_percorrido >= 1/tela->peca->velocidade){
 			move_peca_y(tela->peca,1);
 			counter_inicio = clock();
+			/*if(teste=0){
+				tela->blocos[0].bolinha = 'o';
+				tela->blocos[0].cor = 5;
+				teste = 1;
+			}else{
+				tela->blocos[0].cor = 5;
+				tela->blocos[0].bolinha = ' ';
+				teste = 0;
+			}*/
 			mostra_tela(tela);
-		}*/
+
+			
+		}
 	}	
 			
 	

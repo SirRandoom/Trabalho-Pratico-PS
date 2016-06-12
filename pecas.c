@@ -444,6 +444,12 @@ void rotaciona_peca(peca* peca){
 void speed_up (peca* peca, int y){
 
 	peca->velocidade = peca->velocidade *2;
+	if(peca->cor_peca==4){
+		peca->cor_peca = 5; 
+	}else{
+		peca->cor_peca = 4;
+	}
+	
 
 }
 

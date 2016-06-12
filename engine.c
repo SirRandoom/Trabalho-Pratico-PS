@@ -23,10 +23,6 @@ void finaliza_ncurses(){
 int pega_input(int input){
 	switch(input){
 
-	case KEY_UP:
-	case 'w':
-		return 5;
-		break;
 	case KEY_DOWN:
 	case 's':
 		return 2;
