@@ -36,3 +36,4 @@ void limpa_linha (Tela* t, int y);
 void desce_linhas (Tela* t, int y);
 int verifica_linha(Tela* t);
 int checa_fim(Tela* t);
+

@@ -86,10 +86,11 @@ void mostra_tela(Tela* t){
 			for(j = 0; j < t->largura; j++){
 				wattron(t->janela,COLOR_PAIR(t->blocos[j+i*t->largura].cor));
 				mvwprintw(t->janela,i+1,j+1,&(t->blocos[j+i*t->largura].bolinha));
-				wrefresh(t->janela);				
+								
 			}
 			/*wprintw(t->janela,"\n");*/
 		}
+		wrefresh(t->janela);
 	}
 
 	else if(t->estado == FINAL){
@@ -249,3 +250,4 @@ void troca_letra(Tela* t,int valor){
 void muda_letra(Tela* t,int valor){
 	t->jogador[t->letra] += valor;
 }
+

@@ -26,7 +26,6 @@ int main(){
 
 	int teste = 0;
 
-	double tempo_percorrido;  //Tempo em segundos
 	int pontos = 0;
 	int get = getch();
 	if(pega_input(get)){
@@ -47,7 +46,6 @@ int main(){
 		if(tela->estado = JOGO){
 			if(pega_input(get) == 2){
 				speed_up(tela->peca, 1);
-				mostra_tela(tela);
 			}
 			if(pega_input(get) == 3){
 				move_peca_x(tela->peca,1);
@@ -88,15 +86,19 @@ int main(){
 				if(tela->jogador[tela->letra]!=' '){
 					if(tela->jogador[tela->letra]!='A' && pega_input(get) == 5){
 						muda_letra(tela,-1);
+						continue;
 					}
 					if(tela->jogador[tela->letra]!='Z' && pega_input(get) == 2){
 						muda_letra(tela,1);
+						continue;
 					}
 					if(tela->jogador[tela->letra]=='A' && pega_input(get) == 5){
 						muda_letra(tela,' '-'A');
+						continue;
 					}
-					if(tela->jogador[tela->letra]=='Z' && pega_input(get) == 5){
+					if(tela->jogador[tela->letra]=='Z' && pega_input(get) == 2){
 						muda_letra(tela,' '-'Z');
+						continue;	
 					}
 				}
 				else{
