@@ -1,9 +1,25 @@
-#include "placar.h"
+/**\file*/
+
+#include<curses.h>
+#include<stdlib.h>
+#include<string.h>
+#include<time.h>
+
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#ifndef PLACAR_H
+#include"placar.h"
+#endif
 
 static placar *score;
 
-
-/**Função responsável pela criação do placar, abrindo o arquivo pontuacao.txt, ou criando-o caso não exista, e carregando suas informações na variável score do módulo*/
+/** Cria o placar, inicializando ou lendo o arquivo de pontuação, carregando pro programa os valores obtidos.*/
 void cria_placar(){
 	score = malloc(sizeof(placar));
 	score->contador_jogadores = 0;
@@ -139,7 +155,10 @@ void cria_placar(){
 	fclose(score->arquivo);  
 }
 
-/** Função responsável por atualizar o placar, com ordenamento por critério de maior pontuação, excluindo o jogador de menor pontuação do placar caso o número de jogadores atinja o máximo de 5 jogadores*/
+
+/** Ordena o placar por ordem de pontuação. O limite é de 5 jogadores, sendo excluída a menor pontuação para manter este padrão.
+    \param pontuacao Pontuação do jogador atual.
+*/
 void atualiza_placar(int pontuacao){
 	
 	time_t temp = time(NULL);
@@ -186,7 +205,7 @@ void atualiza_placar(int pontuacao){
 	fclose(score->arquivo);
 }
 
-/** Função responsável por mostrar o placar ao final do jogo*/
+/** Mostra o placar ao fim do jogo.*/
 void mostra_placar(){
 	WINDOW *janela;
 	int i;
@@ -202,7 +221,9 @@ void mostra_placar(){
 	wrefresh(janela);
 }
 
-/** Função settle dos parâmetros do jogador atual*/
+/** Copia os dados da variável local de escore para a tela de execução.
+    \param t Ponteiro para tela.
+*/
 void seta_jogador(Tela *t){
 	strcpy(score->jogador,t->jogador);
 	score->pontuacao = t->pontos;
@@ -210,7 +231,7 @@ void seta_jogador(Tela *t){
 	score->tempo_s = t->tempo_s;
 }
 
-/** Função responsável por desalocar a memória do placar*/
+/** Libera a memória alocada para o placar.*/
 void destroi_placar(){
 	free(score);
 }

@@ -1,11 +1,9 @@
 /** \file */
 
-#include <curses.h>
-#include <stdio.h>
-#include <stdlib.h>
+#define ENGINE_H
 
-void inicia_ncurses(); //Função responsável por inicializar a ncurses
-void finaliza_ncurses(); //Função responsável por finalizar a ncurses
-int pega_input(int input); //Função que interpreta uma entrada de teclado
+extern void inicia_ncurses(); 
+extern void finaliza_ncurses();
+extern int pega_input(int input);
 
 

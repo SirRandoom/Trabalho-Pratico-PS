@@ -1,15 +1,18 @@
 /** \file */
 
+#include<curses.h>
+
+#ifndef ENGINE_H
 #include "engine.h"
+#endif
 
 /**Inicializa o modo ncurses e determina as funcionalidades dele que serão usadas.*/
 void inicia_ncurses(){
-	WINDOW* src;
-	src = initscr();
+        initscr();
 	start_color();
-//	raw();
+	/*	raw(); */
 	keypad(stdscr,TRUE);
-//	noecho();
+	/*noecho();*/
 }
 
 /**Finaliza o modo ncurses.*/

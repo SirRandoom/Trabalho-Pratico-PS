@@ -1,8 +1,20 @@
 /** \file */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include<curses.h>
+#include<stdlib.h>
+#include<string.h>
+
+#ifndef BLOCO_H
+#include "bloco.h"
+#endif
+
+/*#ifdef PECAS_H*/
+#include"pecas.h"
+/*#endif*/
+
+#ifndef TELA_H
 #include "tela.h"
+#endif
 
 /**Cria uma tela de jogo com os parâmetros corretos.
    \return Retorna um ponteiro para tal tela.*/
@@ -236,7 +248,9 @@ void destroi_tela(Tela* t){
 	free(t);
 }	
 
-/** Estado da tela onde o jogador escolhe o seu apelido*/
+/** Estado da tela onde o jogador escolhe o seu apelido.
+    \param t Ponteiro para tela.
+*/
 void define_jogador(Tela* t){
 	clear();
 	mvprintw(1,3,"Defina seu apelido (utilize as setas para alterar as letras e pressione ENTER quando pronto)");
@@ -245,13 +259,18 @@ void define_jogador(Tela* t){
 	refresh();	
 }
 
-/**Função que altera a atual letra selecionada para escolha do apelido*/
+/**Função que altera a atual letra selecionada para escolha do apelido.
+   \param t Ponteiro para tela.
+   \param valor Quantidade a ser incrementada.
+*/
 void troca_letra(Tela* t,int valor){
 	t->letra += valor;
 }
 
-/**Função que alatera o caractér da atual letra selecionada para escolha do apelido*/
+/**Função que alatera o caracter da atual letra selecionada para escolha do apelido.
+   \param t  Ponteiro para tela.
+   \param valor Quantidade a ser incrementada.
+*/
 void muda_letra(Tela* t,int valor){
 	t->jogador[t->letra] += valor;
 }
-

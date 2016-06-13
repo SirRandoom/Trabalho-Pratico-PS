@@ -1,18 +1,29 @@
 /** \file */
 
-#include "pecas.h"
-#include <time.h>
+#include<curses.h>
+#include<stdlib.h>
+#include<time.h>
+
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+/*#ifndef TELA_H*/
+#include"tela.h"
+/*#endif*/
+
+#ifndef PECAS_H
+#include"pecas.h"
+#endif
 
 /** Par de cores das peças variam entre 4 e 7.*/
 unsigned short int cor_nova_peca = 4;
-
+/** Indica quantas chamadas bem-sucedidas para a função speed_up foi feita para uma peça. Valor máximo de 5*/
 unsigned short int speed_ups = 0;
 
-/** Gera nova peça do jogo. Orientação e tamanho são dados de forma pseudoaleatória.
-    A cor é dada de forma cíclica.
+/** Cria nova peça na tela do jogo. O tipo de peça a ser criado é randomizado. A coloração das peças se dá de forma cíclica.
     \param tela Ponteiro para tela de jogo.
 */
-
 void nova_peca(Tela* tela){
 	int tipo; /**<Indica o tipo da peça*/
 	speed_ups = 0;
@@ -47,10 +58,15 @@ void nova_peca(Tela* tela){
 	cor_nova_peca++;
 }
 
+/** Cria uma peça do tipo I na tela.
+    \param tela Ponteiro para tela.
+    \return Ponteiro para a peça.
+*/
+
 peca* cria_peca_I(Tela* tela){
 	int i;
-	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
-	int tamanho = rand()%3 + 3; /**<Indica o tamanho da peça*/
+	int orientacao = rand()%2; 
+	int tamanho = rand()%3 + 3;
 	int tipo = Tipo_I;
 
 	peca *p = malloc(sizeof(peca));
@@ -85,10 +101,14 @@ peca* cria_peca_I(Tela* tela){
 	return(p);
 }
 
+/** Cria uma peça do tipo Z na tela.
+    \param tela Ponteiro para a tela de jogo.
+    \return Ponteiro para a peça.
+*/
 peca* cria_peca_Z(Tela* tela){
 	int i;
-	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
-	int tamanho = 5; /**<Indica o tamanho da peça*/
+	int orientacao = rand()%2;
+	int tamanho = 5; 
 	int tipo = Tipo_Z;
 
 	peca *p = malloc(sizeof(peca));
@@ -139,10 +159,14 @@ peca* cria_peca_Z(Tela* tela){
 	return (p);
 }
 
+/** Cria peça T na tela.
+    \param tela Ponteiro para tela de jogo.
+    \return Ponteiro para a peça.
+*/
 peca* cria_peca_T(Tela* tela){
 	int i;
-	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
-	int tamanho = 7; /**<Indica o tamanho da peça*/
+	int orientacao = rand()%2; 
+	int tamanho = 7; 
 	int tipo = Tipo_T;
 
 	peca *p = malloc(sizeof(peca));
@@ -184,9 +208,13 @@ peca* cria_peca_T(Tela* tela){
 	return(p);
 }
 
+/** Cria peça O na tela.
+    \param tela Ponteiro para a tela de jogo.
+    \return Ponteiro para a peça.
+*/
 peca* cria_peca_O(Tela* tela){
 	int i;
-	int tamanho = 4; /**<Indica o tamanho da peça*/
+	int tamanho = 4; 
 	int tipo = Tipo_O;
 
 	peca *p = malloc(sizeof(peca));
@@ -218,10 +246,14 @@ peca* cria_peca_O(Tela* tela){
 	return(p);
 }
 
+/**Cria peça L na tela.
+   \param tela Ponteiro para a tela.
+   \return Ponteiro  para peça.
+*/
 peca* cria_peca_L(Tela* tela){
 	int i;
-	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
-	int tamanho = 5; /**<Indica o tamanho da peça*/
+	int orientacao = rand()%2;
+	int tamanho = 5; 
 	int tipo = Tipo_L;
 
 	peca *p = malloc(sizeof(peca));
@@ -391,6 +423,10 @@ void move_peca_y(peca* p, int y){
 
 }
 
+/** Rotaciona a peça no sentido horário em torno de seu centro de rotação.
+    \param peca Ponteiro para a peça.
+*/
+
 void rotaciona_peca(peca* peca){
 
 	int x,y,i,j;
@@ -475,7 +511,9 @@ void rotaciona_peca(peca* peca){
 	}
 }
 
-/** Dobra a velocidade de queda das peças só pode ser utilizada 5 vezes*/
+/**Dobra a velocidade da peça. Pode ser chamada com sucesso no máximo 5 vezes para a mesma peça.
+   \param peca Ponteiro para peça.
+*/
 void speed_up (peca* peca, int y){
 
 	if(speed_ups<5){
@@ -492,3 +530,4 @@ void speed_up (peca* peca, int y){
 void libera_peca(peca* p){
 	free(p);
 }
+

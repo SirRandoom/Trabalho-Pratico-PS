@@ -1,9 +1,26 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "timeb.h"
-#include <time.h>
-#include "testes.h"
+#include<curses.h>
+#include<time.h>
+#include<sys/timeb.h>
 
+/*#ifndef BLOCO_H*/
+#include"bloco.h"
+/*#endif*/
+
+/*#ifndef PECAS_H*/
+#include"pecas.h"
+/*#endif*/
+
+/*#ifndef TELA_H*/
+#include"tela.h"
+/*#endif*/
+
+/*#ifndef PLACAR_H*/
+#include"placar.h"
+/*#endif*/
+
+/*#ifndef ENGINE_H*/
+#include"engine.h"
+/*#endif*/
 
 int main(){
 	Tela* tela;
@@ -16,17 +33,6 @@ int main(){
 	inicio.millitm = atual.millitm = peca_drop.millitm = 0;
 	inicio.timezone = atual.timezone = peca_drop.timezone = 0;
 	inicio.dstflag = atual.dstflag = peca_drop.dstflag = 0;
-	
-	if (CUE_SUCCESS != CU_initialize_registry())
-    	return CU_get_error();
-	
-	adiciona_testes();	
-	    	
-    	CU_basic_set_mode(CU_BRM_VERBOSE);
-	/*Roda os testes e mostra na tela os resultados*/
-	(void)CU_basic_run_tests();
-	/*Limpa o registro*/
-	CU_cleanup_registry();
 	
 	inicia_ncurses();
 	tela = cria_tela();
@@ -139,7 +145,7 @@ int main(){
 	destroi_tela(tela);
 	finaliza_ncurses();
 	
-	return CU_get_error();
 	return 0;
 	
 }
+

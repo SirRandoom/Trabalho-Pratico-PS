@@ -1,16 +1,12 @@
 /** \file */
 
-#include<curses.h>
-#include<stdlib.h>
-#include<stdio.h>
-#include"bloco.h"
-#include<string.h>
+#define TELA_H
 
-/** Variável enumerada que indica o estado do jogo.*/
+/** \enum estado Variável enumerada que indica o estado do jogo.*/
 enum estado {INICIO,JOGO,FINAL}; 
 
 /** /struct Define a tela do jogo.*/
-typedef struct Tela{
+typedef struct tela{
   char jogador[3]; /**<Nome do atual jogador.*/ 
   int letra;
   int estado; /**<Estado atual do jogo.*/
@@ -21,19 +17,19 @@ typedef struct Tela{
   int largura; /**<Largura da tela.*/
   WINDOW *janela; /**<Ponteiro para a janela do jogo.*/
   struct Peca* peca; /**<Ponteiro para a peça em movimento.*/
-  bloco /*@out@*/ blocos[]; /**<Matriz dos blocos na tela.*/
+  bloco blocos[]; /**<Matriz dos blocos na tela.*/
 }Tela;
 
-Tela* cria_tela(); 
-void mostra_tela(Tela* t);
-void mostra_pontos(int pontos);
-void mostra_tempo(int minutos,int segundos); 
-void destroi_tela(Tela* t);
-void define_jogador(Tela* t);
-void troca_letra(Tela *t,int valor);
-void muda_letra(Tela *t, int valor); 
-void limpa_linha (Tela* t, int y);
-void desce_linhas (Tela* t, int y);
-int verifica_linha(Tela* t);
-int checa_fim(Tela* t);
+extern Tela* cria_tela(); 
+extern void mostra_tela(Tela* t);
+extern void mostra_pontos(int pontos);
+extern void mostra_tempo(int minutos,int segundos); 
+extern void destroi_tela(Tela* t);
+extern void define_jogador(Tela* t);
+extern void troca_letra(Tela *t,int valor);
+extern void muda_letra(Tela *t, int valor); 
+extern void limpa_linha (Tela* t, int y);
+extern void desce_linhas (Tela* t, int y);
+extern int verifica_linha(Tela* t);
+extern int checa_fim(Tela* t);
 

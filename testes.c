@@ -1,4 +1,25 @@
-#include "testes.h"
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef PECAS_H
+#include"pecas.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#ifndef PLACAR_H
+#include"placar.h"
+#endif
+
+#ifndef ENGINE_H
+#include"engine.h"
+#endif
+
+#ifndef TESTES_H
+
 
 void teste_VerificaCriaTela(void){
 	Tela* tela = cria_tela();

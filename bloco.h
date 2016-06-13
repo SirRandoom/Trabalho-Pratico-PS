@@ -1,7 +1,8 @@
 /** \file */
 
-/** \struct Bloco*/
+#define BLOCO_H
 
+/** \struct Bloco*/
 typedef struct Bloco{
   char bolinha; /**< Caractere atual da peça. */
   unsigned short int cor; /**< Cor da peça. */
@@ -12,7 +13,7 @@ typedef struct Bloco{
   struct Bloco* direita; /**<Ponteiro para vizinho à direita.*/
   struct Bloco* abaixo; /**<Ponteiro para vizinho abaixo.*/
   struct Bloco* acima; /**<Ponteiro para vizinho acima.*/
-}bloco;
+}bloco; /**<\typedef Bloco::bloco*/
 
 /** \def COMPRIMENTO Comprimento do mapa.*/
 #define COMPRIMENTO 15
