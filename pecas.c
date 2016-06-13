@@ -6,41 +6,232 @@
 /** Par de cores das peças variam entre 4 e 7.*/
 unsigned short int cor_nova_peca = 4;
 
+unsigned short int speed_ups = 0;
+
 /** Gera nova peça do jogo. Orientação e tamanho são dados de forma pseudoaleatória.
     A cor é dada de forma cíclica.
     \param tela Ponteiro para tela de jogo.
 */
 
 void nova_peca(Tela* tela){
+	speed_ups = 0;
 	srand(time(NULL));
+	int tipo = rand()%5; /**<Indica o tipo da peça*/
+
+	switch (tipo){
+		case Tipo_I:
+			tela->peca = cria_peca_I(tela);
+			break;
+
+		case Tipo_Z:
+			tela->peca = cria_peca_Z(tela);
+			break;
+
+		case Tipo_T:
+			tela->peca = cria_peca_T(tela);
+			break;
+
+		case Tipo_O:
+			tela->peca = cria_peca_O(tela);
+			break;
+
+		case Tipo_L:
+			tela->peca = cria_peca_L(tela);
+			break;
+	}
+
+	if(cor_nova_peca == 7){
+		cor_nova_peca = 4;
+	}
+	cor_nova_peca++;
+}
+
+peca* cria_peca_I(Tela* tela){
 	int i;
 	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
 	int tamanho = rand()%3 + 3; /**<Indica o tamanho da peça*/
+	int tipo = Tipo_I;
 
 	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
 
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
+	p->tipo = tipo;
+	p->velocidade = 1;
 	p->move_peca = 1;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
 			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
-			p->blocos[i]->cor = p->cor_peca;
-			p->blocos[i]->bolinha = 'o';
-			p->blocos[i]->move = 1;
 		}else{
-			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + tela->largura/2]);
-			p->blocos[i]->cor = p->cor_peca;
-			p->blocos[i]->bolinha = 'o';
-			p->blocos[i]->move = 1;
+			p->blocos[i] = &(tela->blocos[i - (p->tamanho)/2 + tela->largura/2]);		
 		}
+
+		if(i-tamanho/2 == 0){
+			p->centro_de_rotacao = p->blocos[i];
+		}
+
+		p->blocos[i]->cor = p->cor_peca;
+		p->blocos[i]->bolinha = 'o';
+		p->blocos[i]->move = 1;
 	}
-	if(cor_nova_peca == 7){
-		cor_nova_peca = 4;
+	return(p);
+}
+
+peca* cria_peca_Z(Tela* tela){
+	int i;
+	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
+	int tamanho = 5; /**<Indica o tamanho da peça*/
+	int tipo = Tipo_Z;
+
+	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+
+	p->tamanho = tamanho;
+	p->cor_peca = cor_nova_peca;
+	p->tipo = tipo;
+	p->velocidade = 1;
+	p->move_peca = 1;
+
+	for(i = 0; i < p->tamanho; i++){
+		if(orientacao){
+			if(i<2){
+				p->blocos[i] = &(tela->blocos[tela->largura/2 + i]);
+			}else{
+				if(i==2){
+					p->blocos[i] = &(tela->blocos[tela->largura + tela->largura/2 + 1]);
+				}else{
+					p->blocos[i] = &(tela->blocos[2*tela->largura + tela->largura/2 + i - 2]);
+				}
+			}
+			
+		}else{
+			if(i>0&&i<4){
+				p->blocos[i] = &(tela->blocos[tela->largura + tela->largura/2 + i - 1]);
+			}else{
+				if(i==0){
+					p->blocos[i] = &(tela->blocos[2*tela->largura + tela->largura/2]);
+				}else{
+					p->blocos[i] = &(tela->blocos[tela->largura/2 + 2]);
+				}
+			}
+		}
+
+		if(i==2){
+			p->centro_de_rotacao = p->blocos[i];
+		}
+		p->blocos[i]->cor = p->cor_peca;
+		p->blocos[i]->bolinha = 'o';
+		p->blocos[i]->move = 1;
 	}
-	cor_nova_peca++;
-	tela->peca = p;
+	return (p);
+}
+
+peca* cria_peca_T(Tela* tela){
+	int i;
+	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
+	int tamanho = 7; /**<Indica o tamanho da peça*/
+	int tipo = Tipo_T;
+
+	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+
+	p->tamanho = tamanho;
+	p->cor_peca = cor_nova_peca;
+	p->tipo = tipo;
+	p->velocidade = 1;
+	p->move_peca = 1;
+
+	for(i = 0; i < p->tamanho; i++){
+		if(orientacao){
+			if(i<5){
+				p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
+			}else{
+				p->blocos[i] = &(tela->blocos[2*tela->largura + tela->largura/2 - i + 4]);
+			}
+		}else{
+			if(i<5){
+				p->blocos[i] = &(tela->blocos[i - 2 + tela->largura/2]);
+			}else{
+				p->blocos[i] = &(tela->blocos[(i-4)*tela->largura + tela->largura/2]);
+			}
+		}
+
+		if(i==2){
+			p->centro_de_rotacao = p->blocos[i];
+		}
+		p->blocos[i]->cor = p->cor_peca;
+		p->blocos[i]->bolinha = 'o';
+		p->blocos[i]->move = 1;
+	}
+	return(p);
+}
+
+peca* cria_peca_O(Tela* tela){
+	int i;
+	int tamanho = 4; /**<Indica o tamanho da peça*/
+	int tipo = Tipo_O;
+
+	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+
+	p->tamanho = tamanho;
+	p->cor_peca = cor_nova_peca;
+	p->tipo = tipo;
+	p->velocidade = 1;
+	p->move_peca = 1;
+
+	for(i = 0; i < p->tamanho; i++){
+		if(i<2){
+			p->blocos[i] = &(tela->blocos[tela->largura/2 +i]);
+		}else{
+			p->blocos[i] = &(tela->blocos[tela->largura + tela->largura/2 + i - 2]);
+		}
+
+		p->centro_de_rotacao = p->blocos[i];
+		p->blocos[i]->cor = p->cor_peca;
+		p->blocos[i]->bolinha = 'o';
+		p->blocos[i]->move = 1;
+	}
+	return(p);
+}
+
+peca* cria_peca_L(Tela* tela){
+	int i;
+	int orientacao = rand()%2; /**<Indica a orientação da peça. Se 1, a orientação é vertical. Se 0, a orientação é horizontal*/
+	int tamanho = 5; /**<Indica o tamanho da peça*/
+	int tipo = Tipo_L;
+
+	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+
+	p->tamanho = tamanho;
+	p->cor_peca = cor_nova_peca;
+	p->tipo = tipo;
+	p->velocidade = 1;
+	p->move_peca = 1;
+
+	for(i = 0; i < p->tamanho; i++){
+		if(orientacao){
+			if(i<3){
+				p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
+				if(i==1){
+					p->centro_de_rotacao = p->blocos[i]->direita;
+				}
+			}else{
+				p->blocos[i] = &(tela->blocos[2*tela->largura + tela->largura/2 + i - 2]);
+			}
+		}else{
+			if(i<3){
+				p->blocos[i] = &(tela->blocos[2*tela->largura + tela->largura/2 + i]);
+			}else{
+				p->blocos[i] = &(tela->blocos[(4-i)*tela->largura + tela->largura/2 + 2]);
+				if(i==3){
+					p->centro_de_rotacao = p->blocos[i]->esquerda;
+				}
+			}
+		}
+		p->blocos[i]->cor = p->cor_peca;
+		p->blocos[i]->bolinha = 'o';
+		p->blocos[i]->move = 1;
+	}
+	return(p);
 }
 
 /** Movimenta a peça no eixo x, ou seja no sentido horizontal.
@@ -70,14 +261,17 @@ void move_peca_x(peca* p, int x){
 				for (i = p->tamanho - 1; i >= 0; i--){
 					p->blocos[i]->cor = 2;
 					p->blocos[i]->bolinha = ' ';
-					p->blocos[i]->move = 0;
-
+					p->blocos[i]->move = 0;					
+				}
+				for (i = p->tamanho - 1; i >= 0; i--){
 					p->blocos[i] = p->blocos[i]->direita;
 					p->blocos[i]->cor = p->cor_peca;
 					p->blocos[i]->bolinha = 'o';
 					p->blocos[i]->move = 1;
 				}
+				p->centro_de_rotacao = p->centro_de_rotacao->direita;
 			}
+			
 			break;
 		case -1:
 			for (i = 0; i < p->tamanho; i++){
@@ -97,13 +291,17 @@ void move_peca_x(peca* p, int x){
 					p->blocos[i]->cor = 2;
 					p->blocos[i]->bolinha = ' ';
 					p->blocos[i]->move = 0;
-
+					
+				}
+				for (i = 0; i < p->tamanho; i++){
 					p->blocos[i] = p->blocos[i]->esquerda;
 					p->blocos[i]->cor = p->cor_peca;
 					p->blocos[i]->bolinha = 'o';
 					p->blocos[i]->move = 1;
 				}
+				p->centro_de_rotacao = p->centro_de_rotacao->esquerda;
 			}
+
 			break;
 		default:
 			break;
@@ -138,7 +336,9 @@ void move_peca_y(peca* p, int y){
 				p->blocos[i]->cor = 2;
 				p->blocos[i]->bolinha = ' ';
 				p->blocos[i]->move = 0;
+			}
 
+			for (i = p->tamanho - 1; i >= 0; i--){
 				p->blocos[i] = p->blocos[i]->abaixo;
 				p->blocos[i]->cor = p->cor_peca;
 				p->blocos[i]->bolinha = 'o';
@@ -147,6 +347,7 @@ void move_peca_y(peca* p, int y){
 					limite_inferior = 1;
 				}
 			}
+			p->centro_de_rotacao = p->centro_de_rotacao->abaixo;
 		}
 	}
 
@@ -159,10 +360,104 @@ void move_peca_y(peca* p, int y){
 
 }
 
+void rotaciona_peca(peca* peca){
+
+	int x,y,i,j;
+	unsigned short int colisao = 0;
+	bloco* aux[peca->tamanho];
+
+	if(peca->tipo != Tipo_O){
+		for (i = 0; i < peca->tamanho; i++){
+
+			aux[i] = peca->centro_de_rotacao;
+
+			if (peca->blocos[i] != peca->centro_de_rotacao){
+				x = peca->centro_de_rotacao->pos_x - peca->blocos[i]->pos_x;
+				y = peca->centro_de_rotacao->pos_y - peca->blocos[i]->pos_y;
+
+				if(x>0){
+					for (j = 0; j < x; j++){
+						if(aux[i]->acima != NULL){
+							if((aux[i]->acima->bolinha == 'o')&&(aux[i]->acima->move == 0)){
+								colisao = 1;
+							}else{
+								aux[i] = aux[i]->acima;
+							}
+						}else{
+							colisao = 1;
+						}
+					}
+				}else{
+					for (j = 0; j > x; j--){
+						if(aux[i]->abaixo != NULL){
+							if((aux[i]->abaixo->bolinha == 'o')&&(aux[i]->abaixo->move == 0)){
+								colisao = 1;
+							}else{
+								aux[i] = aux[i]->abaixo;
+							}
+						}else{
+							colisao = 1;
+						}
+					}
+				}
+				if(y>0){
+					for (j = 0; j < y; j++){
+						if(aux[i]->direita != NULL){
+							if((aux[i]->direita->bolinha == 'o')&&(aux[i]->direita->move == 0)){
+								colisao = 1;
+							}else{
+								aux[i] = aux[i]->direita;
+							}
+						}else{
+							colisao = 1;
+						}
+					}
+				}else{
+					for (j = 0; j > y; j--){
+						if(aux[i]->esquerda != NULL){
+							if((aux[i]->esquerda->bolinha == 'o')&&(aux[i]->esquerda->move == 0)){
+								colisao = 1;
+							}else{
+								aux[i] = aux[i]->esquerda;
+							}
+						}else{
+							colisao = 1;
+						}
+					}
+				}				
+			}
+		}
+
+		if(colisao!=1){
+			for (i = 0; i < peca->tamanho; i++){
+				peca->blocos[i]->cor = 2;
+				peca->blocos[i]->bolinha = ' ';
+				peca->blocos[i]->move = 0;
+				peca->blocos[i] = aux[i];
+			}
+			for (i = 0; i < peca->tamanho; i++){
+				peca->blocos[i]->cor = peca->cor_peca;
+				peca->blocos[i]->bolinha = 'o';
+				peca->blocos[i]->move = 1;
+			}
+		}			
+	}
+}
+
+/** Dobra a velocidade de queda das peças só pode ser utilizada 5 vezes*/
+void speed_up (peca* peca, int y){
+
+	if(speed_ups<5){
+		peca->velocidade = peca->velocidade *2;
+		speed_ups++;
+	}
+	
+
+}
+
 /** Libera a memória alocada para a peça.
     \param p Ponteiro para a peça a ser liberada.
 */
-
 void libera_peca(peca* p){
 	free(p);
 }

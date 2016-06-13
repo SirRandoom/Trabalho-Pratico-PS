@@ -6,6 +6,7 @@
 
 void adiciona_testes(void);
 
+
 void teste_VerificaCriaTela(void); //Teste que verifica se o ponteiro de tela foi criado
 void teste_VerificaComprimentoTela(void); //Teste que verifica se o comprimento da Tela criada está correto
 void teste_VerificaLarguraTela(void); //Teste que verifica se a largura da Tela criada está correto
