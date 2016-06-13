@@ -16,12 +16,16 @@ Tela* cria_tela(){
 	t->estado = INICIO;
 	strcpy(t->jogador, "AAA");
 	t->letra = 0;	
+	t->pontos = 0;
+	t->tempo_m = t->tempo_s = 0;
+	t->peca = NULL;
 	for(i=0; i < t->comprimento; i++){
 		for(j=0; j < t->largura; j++){
 			t->blocos[j+i*t->largura].bolinha = ' ';
 			t->blocos[j+i*t->largura].move = 0;
 			t->blocos[j+i*t->largura].pos_x = j;
 			t->blocos[j+i*t->largura].pos_y = i;
+			t->blocos[j+i*t->largura].cor = 0;
 			if(j!=0)
 				t->blocos[j+i*t->largura].esquerda = &(t->blocos[j-1+i*t->largura]);
 			else
@@ -74,10 +78,10 @@ void mostra_tela(Tela* t){
 	}
 
 	else if(t->estado == JOGO){
+		int i,j;
 		bkgd(COLOR_PAIR(2));
 		refresh();
 		wbkgd(t->janela,COLOR_PAIR(2));
-		int i,j;
 		mvprintw(11,8,"=>");
 		mvprintw(11,37,"<=");
 		refresh();
@@ -95,9 +99,9 @@ void mostra_tela(Tela* t){
 
 	else if(t->estado == FINAL){
 		char tempo_m[15], tempo_s[15], pontos[15];
-		sprintf(tempo_m,"%d",t->tempo_m);
-		sprintf(tempo_s,"%d",t->tempo_s);
-		sprintf(pontos,"%d",t->pontos);
+		snprintf(tempo_m,sizeof("%d"),"%d",t->tempo_m);
+		snprintf(tempo_s,sizeof("%d"),"%d",t->tempo_s);
+		snprintf(pontos,sizeof("%d"),"%d",t->pontos);
 		bkgd(COLOR_PAIR(3));
 		mvprintw(1,1,"Fim de Jogo :c");
 		mvprintw(2,1,"Pontuação-> ");
@@ -132,8 +136,8 @@ void mostra_pontos(int pontos){
 void mostra_tempo(int minutos,int segundos){
 	WINDOW* janela;
 	char str_m[15],str_s[15];
-	sprintf(str_m,"%d",minutos);
-	sprintf(str_s,"%d",segundos);
+	snprintf(str_m,sizeof("%d"),"%d",minutos);
+	snprintf(str_s,sizeof("%d"),"%d",segundos);
 	janela = newwin(1,20,6,50);
 	wclear(janela);
 	mvwprintw(janela,0,0,"Tempo:");

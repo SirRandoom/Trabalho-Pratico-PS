@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"engine.h"
-#include"tela.h"
+#include"pecas.h"
 #include<string.h>
 #include<time.h>
 

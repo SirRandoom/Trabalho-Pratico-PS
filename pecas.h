@@ -20,8 +20,8 @@ typedef struct Peca{
   unsigned short int move_peca; /**<Booleano que checa se a peça está em movimento ou não.*/
   float velocidade;
   tp_peca tipo;
-  bloco* centro_de_rotacao;
-  bloco* blocos[]; /**<Referência para blocos na tela.*/
+  bloco /*@out@*/ *centro_de_rotacao;
+  bloco /*@out@*/ **blocos; /**<Referência para blocos na tela.*/
 }peca;
 
 void nova_peca(Tela* tela); 

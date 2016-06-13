@@ -4,7 +4,8 @@
 
 /**Inicializa o modo ncurses e determina as funcionalidades dele que serão usadas.*/
 void inicia_ncurses(){
-	initscr();
+	WINDOW* src;
+	src = initscr();
 	start_color();
 //	raw();
 	keypad(stdscr,TRUE);

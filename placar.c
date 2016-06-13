@@ -7,7 +7,7 @@ static placar *score;
 void cria_placar(){
 	score = malloc(sizeof(placar));
 	score->contador_jogadores = 0;
-	FILE *Debug = fopen("saida.txt","w");
+	/*FILE *Debug = fopen("saida.txt","w");*/
 	
 	score->arquivo = fopen("pontuacao.txt","r");
 	if(score->arquivo == NULL){
@@ -21,7 +21,7 @@ void cria_placar(){
 		char* nova_pontuacao = NULL, *novo_tempo_m = NULL, *novo_tempo_s = NULL, *novo_dia = NULL, *novo_mes = NULL, *novo_ano = NULL;
 		while((c = fgetc(score->arquivo)) != EOF){
 			if(c == '\n'){
-				fprintf(Debug,"%s\t%s-%s-%s/%s:%s\n",pontuacao,dia,mes,ano,tempo_m,tempo_s);
+				/*fprintf(Debug,"%s\t%s-%s-%s/%s:%s\n",pontuacao,dia,mes,ano,tempo_m,tempo_s);*/
 				score->pontuacoes[score->contador_jogadores] = (int) strtol(pontuacao, NULL, 10);
 				score->tempos_m[score->contador_jogadores] = (int) strtol(tempo_m,NULL,10);
 				score->tempos_s[score->contador_jogadores] = (int) strtol(tempo_s,NULL,10);
@@ -189,9 +189,11 @@ void atualiza_placar(int pontuacao){
 /** Função responsável por mostrar o placar ao final do jogo*/
 void mostra_placar(){
 	WINDOW *janela;
+	int i;
+	
 	janela = newwin(score->contador_jogadores+2,35,8,25);
 	wbkgd(janela,COLOR_PAIR(3));
-	int i;
+	
 	for(i = 0; i < score->contador_jogadores; i++){
 		mvwprintw(janela,i+1,1,"%s\t%d\t%d-%d-%d/%d:%d\n",score->jogadores[i],score->pontuacoes[i],score->dias[i],score->meses[i],score->anos[i],score->tempos_m[i],score->tempos_s[i]);
 	}

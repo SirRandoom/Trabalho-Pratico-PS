@@ -21,7 +21,7 @@ typedef struct Tela{
   int largura; /**<Largura da tela.*/
   WINDOW *janela; /**<Ponteiro para a janela do jogo.*/
   struct Peca* peca; /**<Ponteiro para a peça em movimento.*/
-  bloco blocos[]; /**<Matriz dos blocos na tela.*/
+  bloco /*@out@*/ blocos[]; /**<Matriz dos blocos na tela.*/
 }Tela;
 
 Tela* cria_tela(); 
