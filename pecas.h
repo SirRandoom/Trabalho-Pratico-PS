@@ -20,7 +20,7 @@ typedef struct Peca{
   float velocidade;
   tp_peca tipo;
   bloco* centro_de_rotacao;
-  bloco* blocos[]; /**<Referência para blocos na tela.*/
+  bloco** blocos; /**<Referência para blocos na tela.*/
 }peca;
 
 void nova_peca(Tela* tela); 

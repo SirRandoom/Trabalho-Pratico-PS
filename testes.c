@@ -31,8 +31,10 @@ void teste_VerificaNovaPeca(void){
 void teste_VerificaMovePecaDireita(void){
 	int i, mover = 1;
 	Tela* tela = cria_tela();
-	int x[tela->peca->tamanho];
+	int* x = NULL;
 	nova_peca(tela);
+	x = malloc(sizeof(int)*tela->peca->tamanho);
+	
 	for(i = 0; i < tela->peca->tamanho; i++){
 		x[i] = tela->peca->blocos[i]->pos_x;
 	}
@@ -53,8 +55,9 @@ void teste_VerificaMovePecaDireita(void){
 void teste_VerificaMovePecaEsquerda(void){
 	Tela* tela = cria_tela();
 	int i, mover = 1;
-	int x[tela->peca->tamanho];
+	int* x = NULL;
 	nova_peca(tela);
+	x = malloc(sizeof(int)*tela->peca->tamanho);
 	for(i = 0; i < tela->peca->tamanho; i++){
 		x[i] = tela->peca->blocos[i]->pos_x;
 	}
@@ -75,8 +78,9 @@ void teste_VerificaMovePecaEsquerda(void){
 void teste_VerificaMovePecaBaixo(void){
 	Tela* tela = cria_tela();
 	int i, mover = 1;
-	int y[tela->peca->tamanho];
+	int* y = NULL;
 	nova_peca(tela);
+	y = malloc(sizeof(int)*tela->peca->tamanho);
 	for(i = 0; i < tela->peca->tamanho; i++){
 		y[i] = tela->peca->blocos[i]->pos_y;
 	}

@@ -52,8 +52,9 @@ peca* cria_peca_I(Tela* tela){
 	int tamanho = rand()%3 + 3; /**<Indica o tamanho da peça*/
 	int tipo = Tipo_I;
 
-	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+	peca *p = malloc(sizeof(peca));
 
+	p->blocos = (bloco**)NULL;
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->tipo = tipo;
@@ -62,6 +63,10 @@ peca* cria_peca_I(Tela* tela){
 	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
+		if(i==0){
+			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
+		}
+			p->blocos[i] = malloc(sizeof(bloco));
 		if(orientacao){
 			p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
 		}else{
@@ -85,8 +90,9 @@ peca* cria_peca_Z(Tela* tela){
 	int tamanho = 5; /**<Indica o tamanho da peça*/
 	int tipo = Tipo_Z;
 
-	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+	peca *p = malloc(sizeof(peca));
 
+	p->blocos = (bloco**)NULL;
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->tipo = tipo;
@@ -95,6 +101,10 @@ peca* cria_peca_Z(Tela* tela){
 	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
+		if(i==0){
+			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
+		}
+			p->blocos[i] = malloc(sizeof(bloco));
 		if(orientacao){
 			if(i<2){
 				p->blocos[i] = &(tela->blocos[tela->largura/2 + i]);
@@ -134,8 +144,9 @@ peca* cria_peca_T(Tela* tela){
 	int tamanho = 7; /**<Indica o tamanho da peça*/
 	int tipo = Tipo_T;
 
-	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+	peca *p = malloc(sizeof(peca));
 
+	p->blocos = (bloco**)NULL;
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->tipo = tipo;
@@ -144,6 +155,10 @@ peca* cria_peca_T(Tela* tela){
 	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
+		if(i==0){
+			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
+		}
+			p->blocos[i] = malloc(sizeof(bloco));
 		if(orientacao){
 			if(i<5){
 				p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
@@ -173,8 +188,9 @@ peca* cria_peca_O(Tela* tela){
 	int tamanho = 4; /**<Indica o tamanho da peça*/
 	int tipo = Tipo_O;
 
-	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+	peca *p = malloc(sizeof(peca));
 
+	p->blocos = (bloco**) NULL;
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->tipo = tipo;
@@ -183,6 +199,10 @@ peca* cria_peca_O(Tela* tela){
 	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
+		if(i==0){
+			p->blocos = malloc(sizeof(bloco*)*tamanho);
+		}
+		p->blocos[i] = malloc(sizeof(bloco));
 		if(i<2){
 			p->blocos[i] = &(tela->blocos[tela->largura/2 +i]);
 		}else{
@@ -203,8 +223,9 @@ peca* cria_peca_L(Tela* tela){
 	int tamanho = 5; /**<Indica o tamanho da peça*/
 	int tipo = Tipo_L;
 
-	peca *p = malloc(sizeof(peca) + tamanho*sizeof(bloco*));
+	peca *p = malloc(sizeof(peca));
 
+	p->blocos = (bloco**)NULL;
 	p->tamanho = tamanho;
 	p->cor_peca = cor_nova_peca;
 	p->tipo = tipo;
@@ -213,6 +234,10 @@ peca* cria_peca_L(Tela* tela){
 	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
+		if(i==0){
+			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
+		}
+			p->blocos[i] = malloc(sizeof(bloco));
 		if(orientacao){
 			if(i<3){
 				p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
