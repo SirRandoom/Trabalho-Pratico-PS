@@ -4,13 +4,6 @@
 #include<stdlib.h>
 #include<time.h>
 
-#ifndef BLOCO_H
-#include"bloco.h"
-#endif
-
-#ifndef TELA_H
-#include"tela.h"
-#endif
 
 #ifndef PECAS_H
 #include"pecas.h"

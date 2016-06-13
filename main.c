@@ -1,18 +1,20 @@
 #include<curses.h>
 #include<time.h>
-#include<sys/timeb.h>
+#include"timeb.h"
+#include "CUnit/CUnit.h"
+#include "CUnit/Basic.h"
 
 /*#ifndef BLOCO_H*/
 #include"bloco.h"
 /*#endif*/
 
-/*#ifndef PECAS_H*/
+#ifndef PECAS_H
 #include"pecas.h"
-/*#endif*/
+#endif
 
-/*#ifndef TELA_H*/
+#ifndef TELA_H
 #include"tela.h"
-/*#endif*/
+#endif
 
 /*#ifndef PLACAR_H*/
 #include"placar.h"

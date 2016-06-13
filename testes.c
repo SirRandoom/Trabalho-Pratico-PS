@@ -19,7 +19,8 @@
 #endif
 
 #ifndef TESTES_H
-
+#include "testes.h"
+#endif
 
 void teste_VerificaCriaTela(void){
 	Tela* tela = cria_tela();

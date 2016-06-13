@@ -1,5 +1,34 @@
 #define TESTES_H
 
+#include<stdio.h>
+#include<stdlib.h>
+#include<curses.h>
+#include<time.h>
+#include"timeb.h"
+
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef PECAS_H
+#include"pecas.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#ifndef PLACAR_H
+#include"placar.h"
+#endif
+
+#ifndef ENGINE_H
+#include"engine.h"
+#endif
+
+#include "CUnit/CUnit.h"
+#include "CUnit/Basic.h"
+
 extern void adiciona_testes(void);
 extern void teste_VerificaCriaTela(void); //Teste que verifica se o ponteiro de tela foi criado
 extern void teste_VerificaComprimentoTela(void); //Teste que verifica se o comprimento da Tela criada está correto

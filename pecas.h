@@ -2,6 +2,15 @@
 
 #define PECAS_H
 
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+
 /** \enum Tipo_Peca Indica qual é o formato da peça a ser mostrada na tela.*/
 enum Tipo_Peca {
 	Tipo_I,
@@ -18,8 +27,8 @@ typedef struct Peca{
   unsigned short int move_peca; /**<Booleano que checa se a peça está em movimento ou não.*/
   float velocidade;/**<Velocidade na qual a peça está caindo.*/
   tp_peca tipo;/**< Qual o formato da peça. */
-  bloco  *centro_de_rotacao; /**< Ponteiro para o bloco de centro de rotação. */
-  bloco  **blocos; /**<Referência para blocos na tela.*/
+  bloco /*@out@*/ *centro_de_rotacao; /**< Ponteiro para o bloco de centro de rotação. */
+  bloco /*@out@*/ **blocos; /**<Referência para blocos na tela.*/
 }peca; 
 
 extern void nova_peca(Tela* tela); 

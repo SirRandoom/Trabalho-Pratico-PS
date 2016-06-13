@@ -1,6 +1,10 @@
 /** \file */
 
 #define TELA_H
+#include<stdio.h>
+#include<stdlib.h>
+#include<curses.h>
+
 
 /** \enum estado Variável enumerada que indica o estado do jogo.*/
 enum estado {INICIO,JOGO,FINAL}; 
@@ -17,7 +21,7 @@ typedef struct tela{
   int largura; /**<Largura da tela.*/
   WINDOW *janela; /**<Ponteiro para a janela do jogo.*/
   struct Peca* peca; /**<Ponteiro para a peça em movimento.*/
-  bloco blocos[]; /**<Matriz dos blocos na tela.*/
+  bloco /*@out@*/ blocos[]; /**<Matriz dos blocos na tela.*/
 }Tela;
 
 extern Tela* cria_tela(); 

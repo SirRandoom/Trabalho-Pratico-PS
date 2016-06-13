@@ -3,16 +3,20 @@ GCC=gcc -Wall -g
 CLIBS=-lncurses -lcunit
 OBJS= pecas.o tela.o placar.o engine.o
 
+
 all: programa teste_exe limpa
 
-programa: $(OBJS) main.c
-	$(GCC) main.c $(OBJS) -o tetris $(CLIBS)
+programa: $(OBJS)  main.o
+	$(GCC) main.o $(OBJS) -o tetris $(CLIBS) -L./CUnit
+	
+main.o: main.c tela.h tela.c pecas.h pecas.c placar.h placar.c engine.h engine.c
+	$(GCC) main.c -c $(CLIBS) -L./CUnit
 
-teste_exe: testes_exe.c testes.o
-	$(GCC) testes_exe.c $(OBJS) -o testes_exe $(CLIBS)
+teste_exe: teste_exe.c testes.o
+	$(GCC) testes.o teste_exe.c $(OBJS) -o testes_exe $(CLIBS) -L./CUnit
 
 testes.o: $(OBJS) testes.c testes.h
-	$(GCC) testes.c -c $(CLIBS)
+	$(GCC) testes.c -c $(CLIBS) -L./CUnit
 
 engine.o: engine.c engine.h
 	$(GCC) engine.c -c $(CLIBS)
