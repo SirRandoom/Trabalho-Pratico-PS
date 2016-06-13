@@ -24,7 +24,7 @@ int main(){
 	    	
     	CU_basic_set_mode(CU_BRM_VERBOSE);
 	/*Roda os testes e mostra na tela os resultados*/
-	CU_basic_run_tests();
+	(void)CU_basic_run_tests();
 	/*Limpa o registro*/
 	CU_cleanup_registry();
 	

@@ -14,10 +14,11 @@ unsigned short int speed_ups = 0;
 */
 
 void nova_peca(Tela* tela){
-	int tipo = rand()%5; /**<Indica o tipo da peça*/
+	int tipo; /**<Indica o tipo da peça*/
 	speed_ups = 0;
-	srand(time(NULL));
-
+	srand((unsigned int)time(NULL));
+	tipo = rand()%5;
+	
 	switch (tipo){
 		case Tipo_I:
 			tela->peca = cria_peca_I(tela);
@@ -200,7 +201,7 @@ peca* cria_peca_O(Tela* tela){
 
 	for(i = 0; i < p->tamanho; i++){
 		if(i==0){
-			p->blocos = malloc(sizeof(bloco*)*tamanho);
+			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
 		}
 		p->blocos[i] = malloc(sizeof(bloco));
 		if(i<2){
@@ -237,7 +238,7 @@ peca* cria_peca_L(Tela* tela){
 		if(i==0){
 			p->blocos = malloc(sizeof(bloco*)*p->tamanho);
 		}
-			p->blocos[i] = malloc(sizeof(bloco));
+		p->blocos[i] = malloc(sizeof(bloco));
 		if(orientacao){
 			if(i<3){
 				p->blocos[i] = &(tela->blocos[i*tela->largura + tela->largura/2]);
