@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "tela.h"
 
+/** \enum Indica qual é o formato da peça a ser mostrada na tela.*/
 enum Tipo_Peca {
 	Tipo_I,
 	Tipo_Z,
