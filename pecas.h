@@ -9,7 +9,7 @@ enum Tipo_Peca {
 	Tipo_T,
 	Tipo_O,
 	Tipo_L,
-};typedef enum Tipo_Peca tp_peca; /**< \typedef Tipo_Peca::tp_peca Formato da peça.*/
+};typedef enum Tipo_Peca tp_peca; 
 
 /** \struct Peca */
 typedef struct Peca{ 
@@ -20,7 +20,7 @@ typedef struct Peca{
   tp_peca tipo;/**< Qual o formato da peça. */
   bloco  *centro_de_rotacao; /**< Ponteiro para o bloco de centro de rotação. */
   bloco  **blocos; /**<Referência para blocos na tela.*/
-}peca; /**</typedef Peca::peca Informações da peça.*/
+}peca; 
 
 extern void nova_peca(Tela* tela); 
 extern void move_peca_x(peca* peca, int x);

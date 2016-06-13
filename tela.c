@@ -8,9 +8,9 @@
 #include "bloco.h"
 #endif
 
-/*#ifdef PECAS_H*/
+#ifdef PECAS_H
 #include"pecas.h"
-/*#endif*/
+#endif
 
 #ifndef TELA_H
 #include "tela.h"
