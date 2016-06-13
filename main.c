@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /** \file */
 
 #include <stdlib.h>
@@ -117,7 +116,7 @@ int main(){
 					}
 				}
 				if(tela->letra!=2){
-					if(pega_input(get) == 3){
+				  if(pega_input(get) == 3){
 						troca_letra(tela,1);
 					}
 				}
