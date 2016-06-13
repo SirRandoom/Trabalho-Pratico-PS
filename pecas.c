@@ -14,9 +14,9 @@ unsigned short int speed_ups = 0;
 */
 
 void nova_peca(Tela* tela){
+	int tipo = rand()%5; /**<Indica o tipo da peça*/
 	speed_ups = 0;
 	srand(time(NULL));
-	int tipo = rand()%5; /**<Indica o tipo da peça*/
 
 	switch (tipo){
 		case Tipo_I:
@@ -59,6 +59,7 @@ peca* cria_peca_I(Tela* tela){
 	p->tipo = tipo;
 	p->velocidade = 1;
 	p->move_peca = 1;
+	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
@@ -91,6 +92,7 @@ peca* cria_peca_Z(Tela* tela){
 	p->tipo = tipo;
 	p->velocidade = 1;
 	p->move_peca = 1;
+	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
@@ -139,6 +141,7 @@ peca* cria_peca_T(Tela* tela){
 	p->tipo = tipo;
 	p->velocidade = 1;
 	p->move_peca = 1;
+	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){
@@ -177,6 +180,7 @@ peca* cria_peca_O(Tela* tela){
 	p->tipo = tipo;
 	p->velocidade = 1;
 	p->move_peca = 1;
+	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(i<2){
@@ -206,6 +210,7 @@ peca* cria_peca_L(Tela* tela){
 	p->tipo = tipo;
 	p->velocidade = 1;
 	p->move_peca = 1;
+	p->centro_de_rotacao = NULL;
 
 	for(i = 0; i < p->tamanho; i++){
 		if(orientacao){

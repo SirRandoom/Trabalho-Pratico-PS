@@ -1,15 +1,22 @@
-/** \file */
-
 #include <stdlib.h>
 #include <stdio.h>
-#include "pecas.h"
-#include <sys/timeb.h>
+#include "timeb.h"
 #include <time.h>
-#include "testes.c"
-
+#include "testes.h"
 
 
 int main(){
+	Tela* tela;
+	struct timeb inicio, atual, peca_drop;
+	int pontos = 0;
+	int get;
+	float time;
+	
+	inicio.time = atual.time = peca_drop.time = 0;
+	inicio.millitm = atual.millitm = peca_drop.millitm = 0;
+	inicio.timezone = atual.timezone = peca_drop.timezone = 0;
+	inicio.dstflag = atual.dstflag = peca_drop.dstflag = 0;
+	
 	if (CUE_SUCCESS != CU_initialize_registry())
     	return CU_get_error();
 	
@@ -22,14 +29,10 @@ int main(){
 	CU_cleanup_registry();
 	
 	inicia_ncurses();
-	Tela* tela = cria_tela();
+	tela = cria_tela();
 	mostra_tela(tela);
-	struct timeb inicio, atual, peca_drop;
-
-	int teste = 0;
-
-	int pontos = 0;
-	int get = getch();
+	
+	get = getch();
 	if(pega_input(get)){
 		tela->estado = JOGO;
 	}
@@ -40,12 +43,12 @@ int main(){
 		
 	while(pega_input(get)){
 		ftime(&atual);
-		mostra_tempo((atual.time - inicio.time)/60,(atual.time - inicio.time)%60);		
+		mostra_tempo((int)(atual.time - inicio.time)/60,(int)(atual.time - inicio.time)%60);		
 		mostra_pontos(pontos);
 		timeout(60);
 		get=getch();
 	
-		if(tela->estado = JOGO){
+		if(tela->estado == JOGO){
 			if(pega_input(get) == 2){
 				speed_up(tela->peca, 1);
 			}
@@ -61,7 +64,7 @@ int main(){
 				rotaciona_peca(tela->peca);
 				mostra_tela(tela);
 			}
-			float time = atual.time - peca_drop.time + 0.001*(atual.millitm - peca_drop.millitm);
+			time = (float) (atual.time - peca_drop.time + 0.001*(atual.millitm - peca_drop.millitm));
 			if(time >= 1/tela->peca->velocidade){
 				move_peca_y(tela->peca,1);
 				ftime(&peca_drop);
@@ -79,8 +82,8 @@ int main(){
 			ftime(&atual);
 			tela->estado = FINAL;
 			tela->pontos = pontos;
-			tela->tempo_m = (atual.time - inicio.time)/60;
-			tela->tempo_s = (atual.time - inicio.time)%60;
+			tela->tempo_m = (int)(atual.time - inicio.time)/60;
+			tela->tempo_s = (int)(atual.time - inicio.time)%60;
 			while(pega_input(get)!=6){
 				define_jogador(tela);
 				get = getch();
@@ -116,7 +119,7 @@ int main(){
 					}
 				}
 				if(tela->letra!=2){
-				  if(pega_input(get) == 3){
+					if(pega_input(get) == 3){
 						troca_letra(tela,1);
 					}
 				}
