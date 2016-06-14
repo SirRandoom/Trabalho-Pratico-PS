@@ -18,7 +18,7 @@ setas direcionais - movimenta peças durante o jogo
 
 Para utilizar o splint foi utilizada a seguinte linha de comando no diretório do trabalho
 
-	splint *.c *.h -weak +infloops +compdef +sysdirerrors
+	splint *.c *.h -weak +infloops +compdef +sysdirerrors -redef
 
 As bibliotecas do sistema (timeb.h, features.h, cdefs.h, stubs.h, stubs-64.h, wordsize.h) foram incluídas no diretório do trabalho devido a problemas de uso do splint.
-Caso o sistema a ser utilizado seja 32 bits, ou algum erro do splint for detectado, deve-se trocar na main o #include "timeb.h" por #include <timeb.h>, e utilizar a diretiva -preproc (além das demais na linha de comando acima referente ao splint) para que seja chamada a timeb.h do sistema e não ocorram erros (pois a timeb.h não se encontra na pasta usr/include, necessitando da diretiva -preproc).
+Caso o sistema a ser utilizado seja 32 bits, ou algum erro do splint for detectado, deve-se trocar na main o #include "timeb.h" por #include <timeb.h>, e utilizar a diretiva -preproc (além das demais na linha de comando acima referente ao splint) para que seja chamada a timeb.h do sistema e não ocorram erros (pois a timeb.h não se encontra na pasta usr/include, necessitando da diretiva -preproc). O -redef foi utilizado, pois o módulo de testes foi realizado em um executável a parte da main.c, apresentando também a função main para funcionar de forma independente, inibindo o warning do splint de redefinição.
