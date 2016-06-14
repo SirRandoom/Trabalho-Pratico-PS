@@ -2,21 +2,21 @@ SHELL=/bin/bash
 GCC=gcc -Wall -g
 CLIBS=-lncurses -lcunit
 OBJS= pecas.o tela.o placar.o engine.o
-
+LINK=-L./CUnit
 
 all: programa teste_exe limpa
 
 programa: $(OBJS)  main.o
-	$(GCC) main.o $(OBJS) -o tetris $(CLIBS) -L./CUnit
-	
+	$(GCC) main.o $(OBJS) -o tetris $(CLIBS) $(LINK)
+
 main.o: main.c tela.h tela.c pecas.h pecas.c placar.h placar.c engine.h engine.c
-	$(GCC) main.c -c $(CLIBS) -L./CUnit
+	$(GCC) main.c -c $(CLIBS) $(LINK)
 
 teste_exe: teste_exe.c testes.o
-	$(GCC) testes.o teste_exe.c $(OBJS) -o testes_exe $(CLIBS) -L./CUnit
+	$(GCC) testes.o teste_exe.c $(OBJS) -o testes_exe $(CLIBS) $(LINK)
 
 testes.o: $(OBJS) testes.c testes.h
-	$(GCC) testes.c -c $(CLIBS) -L./CUnit
+	$(GCC) testes.c -c $(CLIBS) $(LINK)
 
 engine.o: engine.c engine.h
 	$(GCC) engine.c -c $(CLIBS)
