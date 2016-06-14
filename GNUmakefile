@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-GCC=gcc -Wall -g
+GCC=gcc -g
 CLIBS=-lncurses -lcunit
 OBJS= pecas.o tela.o placar.o engine.o
 LINK=-L./CUnit

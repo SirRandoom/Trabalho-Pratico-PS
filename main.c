@@ -1,8 +1,7 @@
 #include<curses.h>
 #include<time.h>
 #include"timeb.h"
-#include "CUnit/CUnit.h"
-#include "CUnit/Basic.h"
+
 
 #ifndef BLOCO_H
 #include"bloco.h"
