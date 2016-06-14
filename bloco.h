@@ -13,7 +13,7 @@ typedef struct Bloco{
   struct Bloco* direita; /**<Ponteiro para vizinho à direita.*/
   struct Bloco* abaixo; /**<Ponteiro para vizinho abaixo.*/
   struct Bloco* acima; /**<Ponteiro para vizinho acima.*/
-}bloco; /**<\typedef Bloco::bloco*/
+}bloco; 
 
 /** \def COMPRIMENTO Comprimento do mapa.*/
 #define COMPRIMENTO 15

@@ -506,6 +506,7 @@ void rotaciona_peca(peca* peca){
 
 /**Dobra a velocidade da peça. Pode ser chamada com sucesso no máximo 5 vezes para a mesma peça.
    \param peca Ponteiro para peça.
+   \param y Inteiro qualquer.
 */
 void speed_up (peca* peca, int y){
 

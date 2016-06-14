@@ -12,7 +12,7 @@ enum estado {INICIO,JOGO,FINAL};
 /** /struct Define a tela do jogo.*/
 typedef struct tela{
   char jogador[3]; /**<Nome do atual jogador.*/ 
-  int letra;
+  int letra; /**<Auxiliar na escolha de nome do jogador.*/
   int estado; /**<Estado atual do jogo.*/
   int pontos; /**<Pontuação do jogador.*/
   int tempo_m; /**<Tempo de execução em minutos.*/

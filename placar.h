@@ -17,7 +17,7 @@ typedef struct Placar{
   int pontuacao; /**<Pontuacao do jogador atual.*/
   int tempo_m; /**<Tempo em minutos do jogador atual.*/
   int tempo_s; /**<Tempo em segundos do jogador atual.*/
-}placar; /**<\typedef Placar::placar*/
+}placar; 
 
 extern void cria_placar();
 extern void atualiza_placar(int pontuacao);

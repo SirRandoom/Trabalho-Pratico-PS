@@ -4,9 +4,9 @@
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
 
-/*#ifndef BLOCO_H*/
+#ifndef BLOCO_H
 #include"bloco.h"
-/*#endif*/
+#endif
 
 #ifndef PECAS_H
 #include"pecas.h"
@@ -16,13 +16,13 @@
 #include"tela.h"
 #endif
 
-/*#ifndef PLACAR_H*/
+#ifndef PLACAR_H
 #include"placar.h"
-/*#endif*/
+#endif
 
-/*#ifndef ENGINE_H*/
+#ifndef ENGINE_H
 #include"engine.h"
-/*#endif*/
+#endif
 
 int main(){
 	Tela* tela;
