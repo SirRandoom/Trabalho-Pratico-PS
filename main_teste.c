@@ -1,6 +1,6 @@
 #include<stdlib.h>
-#include<CUnit/CUnit.h>
-#include<CUnit/Basic.h>
+#include"CUnit/CUnit.h"
+#include"CUnit/Basic.h"
 
 #ifndef BLOCO_H
 #include"bloco.h"
@@ -70,6 +70,10 @@ int main(){
   
   ptr_suite = CU_add_suite("placar_teste_suite", NULL, NULL);
   check_pointer(ptr_suite);
+  ptr_test = CU_add_test(ptr_suite, "test_cria_placar", test_cria_placar);
+  check_pointer(ptr_test);
+  ptr_test = CU_add_test(ptr_suite, "test_atualiza_placar", test_atualiza_placar);
+  check_pointer(ptr_test);
   
   ptr_suite = CU_add_suite("engine_teste_suite", NULL, NULL);
   check_pointer(ptr_suite);
@@ -77,6 +81,7 @@ int main(){
   check_pointer(ptr_test);
   ptr_test = CU_add_test(ptr_suite, "test_pega_input", test_pega_input);
   check_pointer(ptr_test);
+  
   
   CU_basic_set_mode(CU_BRM_VERBOSE);
   code =  CU_basic_run_tests();

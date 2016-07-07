@@ -7,7 +7,9 @@
   #define PLACAR_TESTE_EXT extern
 #endif
 
-PLACAR_TESTE_EXT void test_/*some_function*/();
+PLACAR_TESTE_EXT void test_cria_placar();
+
+PLACAR_TESTE_EXT void test_atualiza_placar();
 
 #undef PLACAR_TESTE_EXT
 #endif
