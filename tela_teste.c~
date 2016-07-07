@@ -1,0 +1,60 @@
+#include<stdlib.h>
+#include<CUnit/CUnit.h>
+
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#define TELA_TESTE_OWN
+#include"tela_teste.h"
+#undef TELA_TESTE_OWN
+
+static void check_pointer(void* p){
+  if(!p){
+    fprintf(stderr, "Invalid NULL pointer.\n");
+    exit(EXIT_FAILURE);
+  }
+}
+
+static void test_cria_tela(){
+  Tela* tela = cria_tela();
+  CU_ASSERT_PTR_NOT_NULL(tela);
+  CU_ASSERT_EQUAL(sizeof(tela), sizeof(Tela)+COMPRIMENTO*LARGURA*sizeof(bloco));
+  CU_ASSERT_EQUAL(tela->comprimento, COMPRIMENTO);
+  CU_ASSERT_EQUAL(tela->largura, LARGURA);
+  CU_ASSERT_EQUAL(tela->estado, INICIO);
+  CU_ASSERT_EQUAL(tela->letra, 0);
+  CU_ASSERT_EQUAL(tela->pontos, 0);
+  CU_ASSERT_EQUAL(tela->tempo_m, 0);
+  CU_ASSERT_EQUAL(tela->tempo_s, 0);
+  CU_ASSERT_PTR_NULL(tela->peca);
+  CU_ASSERT_PTR_NOT_NULL(tela->janela);
+  destroi_tela(tela);
+}
+
+static void test_mostra_tela(){
+  Tela* tela = cria_tela();
+  tela->estado = INICIO;
+  mostra_tela(tela);
+  CU_PASS("mostra_tela() succeded for tela->estado == INICIO");
+  tela->estado = JOGO;
+  mostra_tela(tela);
+  CU_PASS("mostra_tela() succeded for tela->estado == JOGO");
+  tela->estado = FINAL;
+  mostra_tela(tela);
+  CU_PASS("mostra_tela() succeded for tela->estado == FINAL");
+  destroi_tela(tela);
+}
+
+void tela_teste_add_tests(CU_pSuite ptr_suite){
+
+  CU_add_test(ptr_suite, "test_cria_tela", test_cria_tela());
+
+  CU_add_test(ptr_suite, "test_mostra_tela", test_mostra_tela());
+
+  
+}
