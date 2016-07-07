@@ -1,5 +1,6 @@
 /** \file */
 
+#ifndef BLOCO_H
 #define BLOCO_H
 
 /** \struct Bloco*/
@@ -20,3 +21,4 @@ typedef struct Bloco{
 /** \def LARGURA Largura do mapa.*/
 #define LARGURA 25
 
+#endif
