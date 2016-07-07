@@ -1,0 +1,169 @@
+cria_peca_I() <peca *cria_peca_I (Tela *tela) at pecas.c:59>:
+    rand()
+    Tipo_I
+    peca
+    p
+    malloc()
+    bloco
+    NULL
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+    cor
+    bolinha
+    move
+cria_peca_L() <peca *cria_peca_L (Tela *tela) at pecas.c:246>:
+    rand()
+    Tipo_L
+    peca
+    p
+    malloc()
+    bloco
+    NULL
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+    direita
+    esquerda
+    cor
+    bolinha
+    move
+cria_peca_O() <peca *cria_peca_O (Tela *tela) at pecas.c:208>:
+    Tipo_O
+    peca
+    p
+    malloc()
+    bloco
+    NULL
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+    cor
+    bolinha
+    move
+cria_peca_T() <peca *cria_peca_T (Tela *tela) at pecas.c:159>:
+    rand()
+    Tipo_T
+    peca
+    p
+    malloc()
+    bloco
+    NULL
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+    cor
+    bolinha
+    move
+cria_peca_Z() <peca *cria_peca_Z (Tela *tela) at pecas.c:101>:
+    rand()
+    Tipo_Z
+    peca
+    p
+    malloc()
+    bloco
+    NULL
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+    cor
+    bolinha
+    move
+libera_peca() <void libera_peca (peca *p) at pecas.c:524>:
+    free()
+move_peca_x() <void move_peca_x (peca *p, int x) at pecas.c:297>:
+    colisao
+    pos_x
+    direita
+    cor
+    bolinha
+    move
+    esquerda
+move_peca_y() <void move_peca_y (peca *p, int y) at pecas.c:371>:
+    colisao
+    limite_inferior
+    pos_y
+    abaixo
+    cor
+    bolinha
+    move
+nova_peca() <void nova_peca (Tela *tela) at pecas.c:20>:
+    speed_ups <unsigned short int speed_ups at pecas.c:15>
+    srand()
+    time()
+    NULL
+    rand()
+    Tipo_I
+    cria_peca_I() <peca *cria_peca_I (Tela *tela) at pecas.c:59>:
+        rand()
+        Tipo_I
+        peca
+        p
+        malloc()
+        bloco
+        NULL
+        cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+        cor
+        bolinha
+        move
+    Tipo_Z
+    cria_peca_Z() <peca *cria_peca_Z (Tela *tela) at pecas.c:101>:
+        rand()
+        Tipo_Z
+        peca
+        p
+        malloc()
+        bloco
+        NULL
+        cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+        cor
+        bolinha
+        move
+    Tipo_T
+    cria_peca_T() <peca *cria_peca_T (Tela *tela) at pecas.c:159>:
+        rand()
+        Tipo_T
+        peca
+        p
+        malloc()
+        bloco
+        NULL
+        cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+        cor
+        bolinha
+        move
+    Tipo_O
+    cria_peca_O() <peca *cria_peca_O (Tela *tela) at pecas.c:208>:
+        Tipo_O
+        peca
+        p
+        malloc()
+        bloco
+        NULL
+        cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+        cor
+        bolinha
+        move
+    Tipo_L
+    cria_peca_L() <peca *cria_peca_L (Tela *tela) at pecas.c:246>:
+        rand()
+        Tipo_L
+        peca
+        p
+        malloc()
+        bloco
+        NULL
+        cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+        direita
+        esquerda
+        cor
+        bolinha
+        move
+    cor_nova_peca <unsigned short int cor_nova_peca at pecas.c:13>
+rotaciona_peca() <void rotaciona_peca (peca *peca) at pecas.c:423>:
+    colisao
+    bloco
+    aux
+    Tipo_O
+    pos_x
+    pos_y
+    acima
+    NULL
+    abaixo
+    direita
+    esquerda
+    cor
+    bolinha
+    move
+speed_up() <void speed_up (peca *peca, int y) at pecas.c:511>:
+    speed_ups <unsigned short int speed_ups at pecas.c:15>

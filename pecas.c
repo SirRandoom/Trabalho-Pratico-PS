@@ -17,11 +17,18 @@ unsigned short int speed_ups = 0;
 /** Cria nova peça na tela do jogo. O tipo de peça a ser criado é randomizado. A coloração das peças se dá de forma cíclica.
     \param tela Ponteiro para tela de jogo.
 */
-void nova_peca(Tela* tela){
+void nova_peca(Tela* tela, int teste, int valor){
 	int tipo; /**<Indica o tipo da peça*/
 	speed_ups = 0;
 	srand((unsigned int)time(NULL));
-	tipo = rand()%5;
+
+	/*Se a função estiver sendo testada, usar valor arbitrário*/
+	if(teste){
+	  tipo = valor;
+	}
+	else{
+	  tipo = rand()%5;
+	}
 	
 	switch (tipo){
 		case Tipo_I:

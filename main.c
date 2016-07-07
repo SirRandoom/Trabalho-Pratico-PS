@@ -45,7 +45,7 @@ int main(){
 	}
 	ftime(&inicio);
 	ftime(&peca_drop);
-	nova_peca(tela);
+	nova_peca(tela, 0, 0);
 	mostra_tela(tela);
 		
 	while(pega_input(get)){
@@ -80,7 +80,7 @@ int main(){
 			if(!tela->peca->move_peca){
 				pontos += verifica_linha(tela);
 				libera_peca(tela->peca);
-				nova_peca(tela);
+				nova_peca(tela, 0, 0);
 				mostra_tela(tela);
 			}
 		}
@@ -149,4 +149,3 @@ int main(){
 	return 0;
 	
 }
-

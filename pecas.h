@@ -31,7 +31,7 @@ typedef struct Peca{
   bloco /*@out@*/ **blocos; /**<Referência para blocos na tela.*/
 }peca; 
 
-extern void nova_peca(Tela* tela); 
+extern void nova_peca(Tela* tela,int teste, int valor); 
 extern void move_peca_x(peca* peca, int x);
 extern void move_peca_y(peca* peca, int y);
 extern void rotaciona_peca(peca* peca);
