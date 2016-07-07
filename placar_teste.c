@@ -1,5 +1,7 @@
 #include"CUnit/CUnit.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -18,50 +20,45 @@
 
 void test_cria_placar(){
 	cria_placar();
-	FILE *arquivo
+	FILE *arquivo;
 	
 	arquivo = fopen("pontuacao.txt","r");
 	CU_ASSERT_PTR_NOT_NULL(arquivo);
 }
 
 void test_atualiza_placar(){
-	tela* t = nova_tela();
-	int linhas_antes = 0;
-	int linhas_depois = 0;
-	char caracter;
+	Tela *t;
+	int jogadores_antes = 0;
+	int jogadores_depois = 0;
+	char caracter = 0;
 	
-	cria_placar();
-	FILE *arquivo;
-	arquivo = fopen("pontuacao.txt","r");
+	FILE *arquivo = fopen("pontuacao.txt","r");
+	t = cria_tela();
 
-	while(caracter = fgetc(arquivo) != EOF){
+	while((caracter = fgetc(arquivo)) != EOF){
 		if(caracter == '\n'){
-			linhas_antes++;
+			jogadores_antes++;
 		}
 	}
 	fclose(arquivo);
-	
-	strcpy(t->jogador,"TST");
-	t->pontos = 0;
-	t->tempo_m = 0;
-	t->tempo_s = 0; 
+
 	
 	seta_jogador(t);
 	atualiza_placar(t->pontos);
 	
-	arquivo = fopen("pontuacao.txt","r");
+	FILE* arquivo2 = fopen("pontuacao.txt","r");
 	
-	while(caracter = fgetc(arquivo) != EOF){
+	while((caracter = fgetc(arquivo2)) != EOF){
 		if(caracter == '\n'){
-			linhas_depois++;
+			jogadores_depois++;
 		}
 	}
-	fclose(arquivo);
+	fclose(arquivo2);
 	
-	if(linhas_antes == 5){
-		CU_ASSERT_EQUAL(linhas_antes,linhas_depois);
+	if(jogadores_antes == 5){
+		CU_ASSERT_EQUAL(jogadores_antes,jogadores_depois);
 	}
 	else{
-		CU_ASSERT_EQUAL(linhas_depois - linhas_antes, 1);
+		CU_ASSERT_EQUAL(jogadores_depois - jogadores_antes, 1);
 	}
 }

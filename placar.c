@@ -199,7 +199,7 @@ void atualiza_placar(int pontuacao){
 	score->arquivo = fopen("pontuacao.txt","w");
 	
 	for(i = 0; i < score->contador_jogadores; i++){
-		fprintf(score->arquivo,"%s\t%d\t%d-%d-%d/%d:%d\n",score->jogadores[i],score->pontuacoes[i],score->dias[i],score->meses[i],score->anos[i],score->tempos_m[i],score->tempos_s[i]);
+		fprintf(score->arquivo,"%c%c%c\t%d\t%d-%d-%d/%d:%d\n",score->jogadores[i][0],score->jogadores[i][1],score->jogadores[i][2],score->pontuacoes[i],score->dias[i],score->meses[i],score->anos[i],score->tempos_m[i],score->tempos_s[i]);
 	}
 	
 	fclose(score->arquivo);

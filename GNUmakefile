@@ -5,7 +5,7 @@ OBJS= pecas.o tela.o placar.o engine.o
 TESTE_OBJS= tela_teste.o pecas_teste.o placar_teste.o engine_teste.o
 LINK=-L./CUnit
 
-all: programa teste
+all: programa teste limpa
 
 programa: $(OBJS)  main.o
 	$(C) main.o $(OBJS) -o tetris $(CLIBS) $(LINK)
