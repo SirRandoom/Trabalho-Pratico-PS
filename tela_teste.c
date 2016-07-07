@@ -36,16 +36,3 @@ void test_cria_tela(){
   destroi_tela(tela);
 }
 
-void test_mostra_tela(){
-  Tela* tela = cria_tela();
-  tela->estado = INICIO;
-  mostra_tela(tela);
-  CU_PASS("mostra_tela() succeded for tela->estado == INICIO");
-  tela->estado = JOGO;
-  mostra_tela(tela);
-  CU_PASS("mostra_tela() succeded for tela->estado == JOGO");
-  tela->estado = FINAL;
-  mostra_tela(tela);
-  CU_PASS("mostra_tela() succeded for tela->estado == FINAL");
-  destroi_tela(tela);
-}

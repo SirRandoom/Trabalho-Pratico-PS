@@ -9,7 +9,5 @@
 
 TELA_TESTE_EXT void test_cria_tela();
 
-TELA_TESTE_EXT void test_mostra_tela();
-
 #undef TELA_TESTE_EXT
 #endif

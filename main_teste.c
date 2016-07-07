@@ -62,9 +62,7 @@ int main(){
   check_pointer(ptr_suite);
   ptr_test = CU_add_test(ptr_suite, "test_cria_tela",  test_cria_tela);
   check_pointer(ptr_test);
-  ptr_test = CU_add_test(ptr_suite, "test_mostra_tela", test_mostra_tela);
-  check_pointer(ptr_test);
-  
+
   ptr_suite = CU_add_suite("pecas_teste_suite", NULL, NULL);
   check_pointer(ptr_suite);
   ptr_test = CU_add_test(ptr_suite, "test_nova_peca", test_nova_peca);
