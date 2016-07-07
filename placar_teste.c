@@ -8,7 +8,7 @@
 #include"placar_teste.h"
 #undef PLACAR_TESTE_OWN
 
-void pecas_teste_add_test(){
+void test_/*some_function*/(){
   return;
 }
 

@@ -13,9 +13,9 @@
 #include"tela.h"
 #endif
 
-#ifndef PLACAR_H
+#define PLACAR_OWN
 #include"placar.h"
-#endif
+#undef PLACAR_OWN
 
 static placar *score;
 

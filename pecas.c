@@ -4,10 +4,17 @@
 #include<stdlib.h>
 #include<time.h>
 
-
-#ifndef PECAS_H
-#include"pecas.h"
+#ifndef BLOCO_H
+#include"bloco.h"
 #endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#define PECAS_OWN
+#include"pecas.h"
+#undef PECAS_OWN
 
 /** Par de cores das peças variam entre 4 e 7.*/
 unsigned short int cor_nova_peca = 4;

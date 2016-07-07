@@ -15,7 +15,7 @@
 #include"pecas_teste.h"
 #undef PECAS_TESTE_OWN
 
-static void test_nova_peca(){
+void test_nova_peca(){
   Tela* tela = cria_tela();
   if(!tela){
     return;
@@ -39,7 +39,7 @@ static void test_nova_peca(){
   nova_peca(tela, TRUE, Tipo_T);
   CU_ASSERT_PTR_NOT_NULL(tela->peca);
   CU_ASSERT_EQUAL(tela->peca->tipo, Tipo_T);
-  CU_ASSSERT_EQUAL(tela->peca->tamanho, 7);
+  CU_ASSERT_EQUAL(tela->peca->tamanho, 7);
   
   nova_peca(tela, TRUE, Tipo_O);
   CU_ASSERT_PTR_NOT_NULL(tela->peca);
@@ -52,12 +52,6 @@ static void test_nova_peca(){
   CU_ASSERT_EQUAL(tela->peca->tamanho, 5);
 
   destroi_tela(tela);
-}
-
-void pecas_teste_add_tests(CU_pSuite ptr_suite){
-  CU_pTest ptr_test;
-  ptr_test = CU_add_test(ptr_suite, "test_nova_peca", test_nova_peca());
-  check_pointer(ptr_test);
 }
 
 #undef TRUE

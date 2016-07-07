@@ -7,7 +7,7 @@
   #define PLACAR_TESTE_EXT extern
 #endif
 
-PLACAR_TESTE_EXT void placar_teste_add_tests(CU_pSuite ptr_suite);
+PLACAR_TESTE_EXT void test_/*some_function*/();
 
 #undef PLACAR_TESTE_EXT
 #endif

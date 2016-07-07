@@ -2,7 +2,6 @@
 #include<time.h>
 #include"timeb.h"
 
-
 #ifndef BLOCO_H
 #include"bloco.h"
 #endif

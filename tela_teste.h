@@ -7,7 +7,9 @@
   #define TELA_TESTE_EXT extern
 #endif
 
-TELA_TESTE_EXT void tela_teste_add_tests(CU_pSuite ptr);
+TELA_TESTE_EXT void test_cria_tela();
+
+TELA_TESTE_EXT void test_mostra_tela();
 
 #undef TELA_TESTE_EXT
 #endif

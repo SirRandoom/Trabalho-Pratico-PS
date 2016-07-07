@@ -1,5 +1,10 @@
+#include<stdlib.h>
 #include<curses.h>
 #include<CUnit/CUnit.h>
+
+#ifndef ENGINE_H
+#include"engine.h"
+#endif
 
 #define ENGINE_TESTE_OWN
 #include"engine_teste.h"
@@ -12,20 +17,20 @@ static void check_pointer(void* p){
   }
 }
 
-static void test_ncurses(){
+void test_ncurses(){
   inicia_ncurses();
   CU_PASS("inicia_ncurses() succeeded");
   finaliza_ncurses();
   CU_PASS("finaliza_ncurses() succeeded");
 }
 
-static void test_pega_input(){
+void test_pega_input(){
 
   /*Testa todas os valores de entradas ascii que não são caracteres de controle*/
   int c;
   for(c=32;c<128;++c){
     if(c=='s'){
-      CU_ASSERT_nEQUAL(pega_input(c), 2);
+      CU_ASSERT_EQUAL(pega_input(c), 2);
     }
     else if(c=='d'){
       CU_ASSERT_EQUAL(pega_input(c), 3);
@@ -53,12 +58,3 @@ static void test_pega_input(){
   
 }
 
-void engine_test_add_tests(CU_pSuite ptr_suite){
-  CU_pTest ptr_test;
-
-  ptr_test = CU_add_test(ptr_suite, "test_ncurses", test_ncurses());
-  check_pointer(ptr_test);
-  ptr_test = CU_add_test(ptr_suite, "test_pega_input", teste_pega_input());
-  check_pointer(pte_test);
-  
-}

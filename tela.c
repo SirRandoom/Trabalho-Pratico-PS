@@ -12,9 +12,9 @@
 #include"pecas.h"
 #endif
 
-#ifndef TELA_H
+#define TELA_OWN
 #include "tela.h"
-#endif
+#undef TELA_OWN
 
 /**Cria uma tela de jogo com os parâmetros corretos.
    \return Retorna um ponteiro para tal tela.*/

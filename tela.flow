@@ -1,0 +1,89 @@
+checa_fim() <int checa_fim (Tela *t) at tela.c:233>:
+    bolinha
+    move()
+    true
+    false
+cria_tela() <Tela *cria_tela () at tela.c:21>:
+    Tela
+    t
+    malloc()
+    COMPRIMENTO
+    LARGURA
+    bloco
+    INICIO
+    strcpy()
+    NULL
+    bolinha
+    move()
+    pos_x
+    pos_y
+    cor
+    esquerda
+    direita
+    abaixo
+    acima
+    newwin()
+    box()
+    ACS_VLINE
+    ACS_HLINE
+define_jogador() <void define_jogador (Tela *t) at tela.c:254>:
+    clear()
+    mvprintw()
+    refresh()
+desce_linhas() <void desce_linhas (Tela *t, int y) at tela.c:209>:
+    bolinha
+    cor
+destroi_tela() <void destroi_tela (Tela *t) at tela.c:247>:
+    free()
+limpa_linha() <void limpa_linha (Tela *t, int y) at tela.c:194>:
+    bolinha
+    cor
+mostra_pontos() <void mostra_pontos (int pontos) at tela.c:133>:
+    WINDOW
+    janela
+    snprintf()
+    newwin()
+    wclear()
+    mvwprintw()
+    wrefresh()
+mostra_tela() <void mostra_tela (Tela *t) at tela.c:70>:
+    init_pair()
+    COLOR_BLACK
+    COLOR_BLUE
+    COLOR_WHITE
+    COLOR_YELLOW
+    COLOR_RED
+    COLOR_GREEN
+    clear()
+    refresh()
+    INICIO
+    bkgd()
+    COLOR_PAIR()
+    move()
+    printw()
+    JOGO
+    wbkgd()
+    mvprintw()
+    wattron()
+    cor
+    mvwprintw()
+    bolinha
+    wrefresh()
+    FINAL
+    snprintf()
+mostra_tempo() <void mostra_tempo (int minutos, int segundos) at tela.c:148>:
+    WINDOW
+    janela
+    snprintf()
+    newwin()
+    wclear()
+    mvwprintw()
+    wrefresh()
+verifica_linha() <int verifica_linha (Tela *t) at tela.c:167>:
+    bolinha
+    limpa_linha() <void limpa_linha (Tela *t, int y) at tela.c:194>:
+        bolinha
+        cor
+    desce_linhas() <void desce_linhas (Tela *t, int y) at tela.c:209>:
+        bolinha
+        cor

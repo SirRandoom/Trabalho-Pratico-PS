@@ -7,7 +7,9 @@
   #define ENGINE_TESTE_EXT extern
 #endif
 
-ENGINE_TESTE_EXT engine_test_add_tests(CU_pSuite ptr);
+ENGINE_TESTE_EXT void test_ncurses();
+
+ENGINE_TESTE_EXT void test_pega_input();
 
 #undef ENGINE_TESTE_EXT
 #endif 

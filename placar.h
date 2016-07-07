@@ -1,6 +1,25 @@
 /**\file*/
 
+#ifndef BLOCO_H
+#include"bloco.h"
+#endif
+
+#ifndef PECAS_H
+#include"pecas.h"
+#endif
+
+#ifndef TELA_H
+#include"tela.h"
+#endif
+
+#ifndef PLACAR_H
 #define PLACAR_H
+
+#ifdef PLACAR_OWN
+  #define PLACAR_EXT
+#else
+  #define PLACAR_EXT extern
+#endif
 
 /** \struct Placar */
 typedef struct Placar{
@@ -19,8 +38,11 @@ typedef struct Placar{
   int tempo_s; /**<Tempo em segundos do jogador atual.*/
 }placar; 
 
-extern void cria_placar();
-extern void atualiza_placar(int pontuacao);
-extern void mostra_placar();
-extern void destroi_placar();
-extern void seta_jogador(Tela *t);
+PLACAR_EXT void cria_placar();
+PLACAR_EXT void atualiza_placar(int pontuacao);
+PLACAR_EXT void mostra_placar();
+PLACAR_EXT void destroi_placar();
+PLACAR_EXT void seta_jogador(Tela *t);
+
+#undef PLACAR_EXT
+#endif

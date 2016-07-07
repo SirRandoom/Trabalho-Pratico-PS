@@ -2,9 +2,9 @@
 
 #include<curses.h>
 
-#ifndef ENGINE_H
-#include "engine.h"
-#endif
+#define ENGINE_OWN
+#include"engine.h"
+#undef ENGINE_OWN
 
 /**Inicializa o modo ncurses e determina as funcionalidades dele que serão usadas.*/
 void inicia_ncurses(){

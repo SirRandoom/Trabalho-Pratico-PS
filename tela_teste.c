@@ -20,7 +20,7 @@ static void check_pointer(void* p){
   }
 }
 
-static void test_cria_tela(){
+void test_cria_tela(){
   Tela* tela = cria_tela();
   CU_ASSERT_PTR_NOT_NULL(tela);
   CU_ASSERT_EQUAL(sizeof(tela), sizeof(Tela)+COMPRIMENTO*LARGURA*sizeof(bloco));
@@ -36,7 +36,7 @@ static void test_cria_tela(){
   destroi_tela(tela);
 }
 
-static void test_mostra_tela(){
+void test_mostra_tela(){
   Tela* tela = cria_tela();
   tela->estado = INICIO;
   mostra_tela(tela);
@@ -48,15 +48,4 @@ static void test_mostra_tela(){
   mostra_tela(tela);
   CU_PASS("mostra_tela() succeded for tela->estado == FINAL");
   destroi_tela(tela);
-}
-
-void tela_teste_add_tests(CU_pSuite ptr_suite){
-
-  CU_pTest ptr_test;
-  
-  ptr_test = CU_add_test(ptr_suite, "test_cria_tela", test_cria_tela());
-  test_pointer(ptr_test);
-  ptr_test = CU_add_test(ptr_suite, "test_mostra_tela", test_mostra_tela());
-  test_pointer(ptr_test);
-  
 }
