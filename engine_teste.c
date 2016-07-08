@@ -1,3 +1,4 @@
+/**\file*/
 #include<stdlib.h>
 #include<curses.h>
 #include<CUnit/CUnit.h>
@@ -10,6 +11,9 @@
 #include"engine_teste.h"
 #undef ENGINE_TESTE_OWN
 
+/**Verifica se o ponteiro é NULL. Se o for, encerra o programa.
+   \param p Ponteiro genérico.
+*/
 static void check_pointer(void* p){
   if(!p){
     fprintf(stderr, "Invalid NULL pointer.\n");
@@ -17,6 +21,7 @@ static void check_pointer(void* p){
   }
 }
 
+/**Verifica se é possível inicializar e finalizar as funções do curses corretamente. */
 void test_ncurses(){
   inicia_ncurses();
   CU_PASS("inicia_ncurses() succeeded");
@@ -24,6 +29,7 @@ void test_ncurses(){
   CU_PASS("finaliza_ncurses() succeeded");
 }
 
+/**Testa a função peca_input(). Garante que dentro da faixa de caracteres ascii que não são caracteres de controle são interpretados corretamente. Além disso, verifica alguns caracteres especiais do curses que serão usados no programa.*/
 void test_pega_input(){
 
   /*Testa todas os valores de entradas ascii que não são caracteres de controle*/

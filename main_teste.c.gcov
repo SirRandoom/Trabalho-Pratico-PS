@@ -1,0 +1,103 @@
+        -:    0:Source:main_teste.c
+        -:    0:Programs:1
+        -:    1:/**\file*/
+        -:    2:#include<stdlib.h>
+        -:    3:#include"CUnit/CUnit.h"
+        -:    4:#include"CUnit/Basic.h"
+        -:    5:
+        -:    6:#ifndef BLOCO_H
+        -:    7:#include"bloco.h"
+        -:    8:#endif
+        -:    9:
+        -:   10:#ifndef TELA_H
+        -:   11:#include"tela.h"
+        -:   12:#endif
+        -:   13:
+        -:   14:#ifndef PECAS_H
+        -:   15:#include"pecas.h"
+        -:   16:#endif
+        -:   17:
+        -:   18:#ifndef PLACAR_H
+        -:   19:#include"placar.h"
+        -:   20:#endif
+        -:   21:
+        -:   22:#ifndef ENGINE_H
+        -:   23:#include"engine.h"
+        -:   24:#endif
+        -:   25:
+        -:   26:#ifndef TELA_TESTE_H
+        -:   27:#include"tela_teste.h"
+        -:   28:#endif
+        -:   29:
+        -:   30:#ifndef PECAS_TESTE_H
+        -:   31:#include"pecas_teste.h"
+        -:   32:#endif
+        -:   33:
+        -:   34:#ifndef PLACAR_TESTE_H
+        -:   35:#include"placar_teste.h"
+        -:   36:#endif
+        -:   37:
+        -:   38:#ifndef ENGINE_TESTE_H
+        -:   39:#include"engine_teste.h"
+        -:   40:#endif
+        -:   41:
+        -:   42:/**Avalia se o ponteiro é NULL. Se o for, finaliza o programa.
+        -:   43:   \param p Ponteiro genérico. 
+        -:   44:*/
+       10:   45:static void check_pointer(void* p){
+       10:   46:  if(!p){
+    #####:   47:    fprintf(stderr, "Invalid NULL pointer.\n");
+    #####:   48:    exit(EXIT_FAILURE);
+        -:   49:  }
+       10:   50:}
+        -:   51:
+        1:   52:int main(){
+        -:   53:
+        -:   54:  CU_ErrorCode code;
+        -:   55:
+        1:   56:  code = CU_initialize_registry();
+        1:   57:  if(code!=CUE_SUCCESS){
+    #####:   58:    fprintf(stderr, "Memory allocation failed\n");
+    #####:   59:    exit(EXIT_FAILURE);
+        -:   60:  }
+        -:   61:
+        -:   62:  CU_pSuite ptr_suite;
+        -:   63:  CU_pTest ptr_test;
+        -:   64:  
+        1:   65:  ptr_suite = CU_add_suite("tela_teste_suite", NULL, NULL);
+        1:   66:  check_pointer(ptr_suite);
+        1:   67:  ptr_test = CU_add_test(ptr_suite, "test_cria_tela",  test_cria_tela);
+        1:   68:  check_pointer(ptr_test);
+        -:   69:
+        1:   70:  ptr_suite = CU_add_suite("pecas_teste_suite", NULL, NULL);
+        1:   71:  check_pointer(ptr_suite);
+        1:   72:  ptr_test = CU_add_test(ptr_suite, "test_nova_peca", test_nova_peca);
+        1:   73:  check_pointer(ptr_test);
+        -:   74:  
+        1:   75:  ptr_suite = CU_add_suite("placar_teste_suite", NULL, NULL);
+        1:   76:  check_pointer(ptr_suite);
+        1:   77:  ptr_test = CU_add_test(ptr_suite, "test_cria_placar", test_cria_placar);
+        1:   78:  check_pointer(ptr_test);
+        1:   79:  ptr_test = CU_add_test(ptr_suite, "test_atualiza_placar", test_atualiza_placar);
+        1:   80:  check_pointer(ptr_test);
+        -:   81:  
+        1:   82:  ptr_suite = CU_add_suite("engine_teste_suite", NULL, NULL);
+        1:   83:  check_pointer(ptr_suite);
+        1:   84:  ptr_test = CU_add_test(ptr_suite, "test_ncurses", test_ncurses);
+        1:   85:  check_pointer(ptr_test);
+        1:   86:  ptr_test = CU_add_test(ptr_suite, "test_pega_input", test_pega_input);
+        1:   87:  check_pointer(ptr_test);
+        -:   88:  
+        -:   89:  
+        1:   90:  CU_basic_set_mode(CU_BRM_VERBOSE);
+        1:   91:  code =  CU_basic_run_tests();
+        1:   92:  if(code != CUE_SUCCESS){
+    #####:   93:    fprintf(stderr, "An error occured!\n");
+    #####:   94:    code = CU_get_error();
+    #####:   95:    fprintf(stderr, "Raising error: %d\n", code);
+    #####:   96:    exit(EXIT_FAILURE);
+        -:   97:  }
+        -:   98:  
+        1:   99:  CU_cleanup_registry();
+        1:  100:  return 0;
+        -:  101:}

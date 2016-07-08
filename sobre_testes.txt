@@ -1,0 +1,57 @@
+Segue abaixo a lista das funções que foram escolhidas, pela sua relevência, para serem testadas.
+
+
+----tela.c----
+
+Tela* cria_tela();
+
+***
+Testada para casos de exceção
+***
+
+--------------
+
+
+----pecas.c----
+
+void nova_peca(Tela* tela, int teste, int valor);
+
+***
+Testada pelo critério de arestas. Foi a única função testada do módulo porque é ela que invoca todo o restante das funções de criação. Dado o caráter aleatório da função, criou-se uma maneira de se sobrepor a essa aleatoriedade colocando o valor teste == TRUE.
+***
+
+--------------
+
+----engine.c----
+
+int pega_input(int entrada);
+
+***
+Testada para valores mais possíveis de serem inseridos pelo usuário por métodos padrões.
+***
+
+void inicia_ncurses();
+void finaliza_ncurses();
+
+***
+Testa a funcionalidade do ncurses.
+***
+
+---------------
+
+
+----placar.c----
+
+void cria_placar();
+
+***
+Testada para caso de exceção. Verifica se cria um arquivo válido.
+***
+
+void atualiza_placar(int pontuacao);
+
+***
+Testada para casos de exceção (arquivo inválido) e segundo critério de valores extremos.
+***
+
+---------------

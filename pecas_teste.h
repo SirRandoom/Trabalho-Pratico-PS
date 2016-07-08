@@ -1,3 +1,4 @@
+/**\file*/
 #ifndef PECAS_TESTE_H
 #define PECAS_TESTE_H
 

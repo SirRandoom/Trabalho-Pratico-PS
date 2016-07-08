@@ -1,3 +1,5 @@
+/**\file*/
+
 #ifndef TELA_TESTE_H
 #define TELA_TESTE_H
 

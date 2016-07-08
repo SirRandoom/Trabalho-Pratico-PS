@@ -1,3 +1,4 @@
+/**\file*/
 #include<stdlib.h>
 #include"CUnit/CUnit.h"
 #include"CUnit/Basic.h"
@@ -38,7 +39,10 @@
 #include"engine_teste.h"
 #endif
 
-void check_pointer(void* p){
+/**Avalia se o ponteiro é NULL. Se o for, finaliza o programa.
+   \param p Ponteiro genérico. 
+*/
+static void check_pointer(void* p){
   if(!p){
     fprintf(stderr, "Invalid NULL pointer.\n");
     exit(EXIT_FAILURE);

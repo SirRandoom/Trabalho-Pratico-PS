@@ -1,3 +1,4 @@
+/**\file*/
 #include<CUnit/CUnit.h>
 
 #define TRUE 1
@@ -15,6 +16,8 @@
 #include"pecas_teste.h"
 #undef PECAS_TESTE_OWN
 
+/** Testa a função nova_peca(Tela*, int, int). Testa todos os casos do "switch case" da função nova_peca(), chamando exatamente uma vez cada função de criação: cria_peca_I, cria_peca_Z, cria_peca_T, cria_peca_O, cria_peca_L. Para cada peça criada, é testado se a peça é alocada e, além disse, se ela é inicializada com os parâmetros esperados.
+*/
 void test_nova_peca(){
   Tela* tela = cria_tela();
   if(!tela){

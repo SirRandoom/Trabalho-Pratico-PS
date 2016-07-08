@@ -1,3 +1,4 @@
+/**\file*/
 #ifndef PLACAR_TESTE_H
 #define PLACAR_TESTE_H
 
